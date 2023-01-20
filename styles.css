@@ -1,0 +1,53 @@
+body {
+  background-color:#2f3136;
+  margin:0px;
+}
+
+p {
+  color:white;
+  font-family:verdana;
+}
+
+h1 {
+  color:white;
+  font-family:verdana;
+}
+
+span {
+  color:white;
+  font-family:verdana;
+}
+
+a {
+  color:white;
+  font-family:verdana;
+  text-decoration: none;
+}
+
+.navbar {
+  background-color:#403e3d;
+  text-align:center;
+  position:sticky;
+  top:0;
+  padding:10px;
+}
+
+.navbar a {
+  padding-left:20px;
+  padding-right:20px;
+  padding-top:5px;
+  padding-bottom:5px;
+  opacity:0.8;
+}
+
+.navbar a:hover {
+  background-color:#F79420;
+  border-radius:15px;
+  opacity:1;
+}
+
+.holder a {
+  font-family:monospace;
+  font-size:160%;
+  text-decoration: underline
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .holder {
+      margin-top:40px;
+      margin-bottom:40px;
+      padding:20px;
+      max-width:700px;
+      position:relative;
+      left:50%;
+      transform:translateX(-50%);
+    }
+
+    button {
+      padding:2px;
+      padding-left:5px;
+      padding-right:5px;
+      border-radius:12px;
+      opacity:0.8;
+      background-color:white;
+      margin:10px;
+      font-family:monospace;
+    }
+
+    button:hover{
+      opacity:1;
+    }
+
+  </style>
+</head>
+<body onload="loadfnc()">
+  <h1 style="text-align:center;margin:30px;margin-bottom:10px;">Tady jsou všechny moje výtvory v Java scriptu</h1>
+  <button onclick="loadfnc()">změnit barvu</button>
+  <button onclick="rainbow()" id="rainbowBtn">rainbow mode</button>
+  <div class="navbar">
+    <p style="margin:0;padding:5px;">NAVIGACE</p>
+    <br>
+    <a href="index.html">HOME</a>
+    <a href="auth.html">JANČA</a>
+    <a href="stuff.html">JAVA SCRIPT</a>
+  </div>
+  <div id="siteholder" class="holder">
+      <a href="JS creations/calculator/calculator.html">Kalkulátor</a>
+      <br>
+      <p style="padding:5px;">základní kalkulačka, prijímá čísla a operátory jako je " + ;- ;* ; / " nic moc k tomu dodat nejde</p>
+  </div>
+<script>
+  let hexarray = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
+  let x = 0
+  let i = 0
+  let base = 0
+
+  function loadfnc() {
+    base = hexarray[~~(Math.random() * hexarray.length)]
+    while (i < 5){
+      base =  base + hexarray[~~(Math.random() * hexarray.length)];
+      i++
+    }
+    color = "#" + base + "40"
+    console.log(color)
+    document.getElementById("siteholder").style.backgroundColor = color
+    i = 0
+    base = hexarray[~~(Math.random() * hexarray.length)];
+  }
+
+  function rainbow() {
+    if (x == 0){
+      loadfnc()
+      rainbowInterval = setInterval(loadfnc, 600);
+      x = 1;
+      document.getElementById("rainbowBtn").style.backgroundColor ="lime"
+    }
+   else if (x == 1){
+     clearInterval(rainbowInterval);
+     x = 0
+     document.getElementById("rainbowBtn").style.backgroundColor ="white"
+    }
+  }
+</script>
+</body>
+</html>

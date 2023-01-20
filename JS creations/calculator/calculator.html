@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+<input id="num1" type="number">
+<input style="width:20px;" id="operator" type="text">
+<input id="num2" type="number">
+<p id="text">output here</p>
+<button onclick="submit()">CALCULATE!</button>
+<script>
+let x = 0
+let y = 0
+let operation = 0
+let output = 0
+function submit(){
+x = document.getElementById("num1").value;
+x = parseInt(x);
+y = document.getElementById("num2").value;
+y = parseInt(y);
+operation = document.getElementById("operator").value;
+calculate();
+document.getElementById("text").innerHTML = output;
+}
+
+function calculate(){
+if (operation == "+"){
+  output = x + y
+  }
+if (operation == "-"){
+  output = x - y
+  }
+if (operation == "*"){
+  output = x * y
+  }
+if (operation == "/"){
+  output = x/y
+  }
+if (operation !== "+" && operation !== "-" && operation !== "*" && operation !== "/"){
+  output = "something went wrong :/"
+  }
+}
+</script>
+</body>
+</html>
