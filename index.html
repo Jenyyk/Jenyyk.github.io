@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="cs" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style>
+    body {
+      overflow:hidden;
+      margin:0;
+      background-color:rgb(6, 6, 20)
+    }
+
+    .wrapper {
+      height:65vh;
+      width:65vh;
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      border:1px solid rgb(150, 150, 150);
+    }
+
+    .embed {
+      word-wrap: break-word;
+      white-space: -moz-pre-wrap;
+      white-space: pre-wrap;
+      height:62vh;
+      width:62vh;
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      overflow:hidden;
+      opacity:0;
+      transition: all 600ms;
+      border-radius:60px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .embed:hover{
+      opacity:1;
+      transition: all 300ms;
+    }
+
+    #text {
+      font-family:verdana;
+      position:absolute;
+      width:103%;
+      left:-2%;
+      top:-4%;
+      color:rgb(100, 200, 200)
+    }
+
+    #logo {
+    }
+
+  </style>
+</head>
+<body onload="loadFnc()">
+<div class="wrapper">
+<div class="embed">
+<span id="text"></span>
+<img>
+<div>
+</div>
+<script>
+let array = []
+let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+
+function loadFnc() {
+  window.addEventListener('mousemove', genText)
+}
+
+function genText() {
+  array = ""
+  let i = 0
+  while (i < 2000) {
+    charSet = chars.split("")
+    randomChar = charSet[Math.floor(Math.random()*charSet.length)]
+    array += randomChar
+    i++
+  }
+  document.getElementById("text").innerHTML = array
+}
+</script>
+</body>
+</html>
