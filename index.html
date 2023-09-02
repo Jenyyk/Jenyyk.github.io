@@ -2,7 +2,8 @@
 <html lang="cs" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <link href="favicon.ico" rel="icon">
+  <title>Effect gallery</title>
   <style>
     body {
       overflow:hidden;
@@ -64,6 +65,12 @@
       pointer-events:none;
     }
 
+    @media (max-width:1000px) {
+      #text {
+        opacity:1;
+      }
+    }
+
   </style>
 </head>
 <body onload="loadFnc()">
@@ -79,6 +86,7 @@ let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 function loadFnc() {
   window.addEventListener('mousemove', genText)
+  widthInterval = setInterval(genText, 10)
 }
 
 function genText() {
@@ -91,6 +99,9 @@ function genText() {
     i++
   }
   document.getElementById("text").innerHTML = array
+  if (window.innerWidth > 1000) {
+    clearInterval(widthInterval)
+  }
 }
 </script>
 </body>
