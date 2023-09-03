@@ -66,8 +66,46 @@
       pointer-events:none;
     }
 
+    .switchEmbed {
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      top:82vh;
+    }
+
+    #switcher {
+      color:rgb(100, 200, 200);
+      font-family:verdana;
+      font-size:12vh;
+    }
+
+    #blinker {
+      color:rgb(100, 200, 200);
+      font-family:verdana;
+      font-size:12vh;
+      animation:blinking 1200ms infinite;
+    }
+
     @media (max-width:1200px) {
       #text {
+        opacity:1;
+      }
+    }
+
+    @keyframes blinking {
+      from {
+        opacity:1;
+      }
+      1% {
+        opacity:0;
+      }
+      40% {
+        opacity:0;
+      }
+      41% {
+        opacity:1;
+      }
+      to {
         opacity:1;
       }
     }
@@ -79,15 +117,21 @@
 <div class="embed">
 <span href="" id="text"></span>
 <img id="logo" src="logo.png">
-<div>
+</div>
+</div>
+<div class="switchEmbed">
+<span id="switcher">PERPLEXED</span>
+<span id="blinker">|</span>
 </div>
 <script>
-let array = []
 let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+let messages = ["PERPLEXED","MYSTIFIED","INTRIGUED","INQUIRING"]
+let last = "PERPLEXED"
 
 function loadFnc() {
   window.addEventListener('mousemove', genText)
   widthInterval = setInterval(genText, 10)
+  removeLetter()
 }
 
 function genText() {
@@ -102,6 +146,32 @@ function genText() {
   document.getElementById("text").innerHTML = array
   if (window.innerWidth > 1200) {
     clearInterval(widthInterval)
+  }
+}
+
+function removeLetter() {
+  switcher = document.getElementById("switcher")
+  if (switcher.innerHTML.length == 0) {
+    newText = messages[Math.floor(Math.random() * messages.length)]
+    while (newText == last) {
+      newText = messages[Math.floor(Math.random() * messages.length)]
+    }
+    i = 0
+    addLetter()
+  } else {
+    switcher.innerHTML = switcher.innerHTML.slice(0, -1)
+    setTimeout(removeLetter, 50)
+  }
+}
+
+function addLetter() {
+  if (i == newText.length) {
+    last = switcher.innerHTML
+    setTimeout(removeLetter, 1500)
+  } else {
+    switcher.innerHTML += newText.charAt(i)
+    i++
+    setTimeout(addLetter, 50)
   }
 }
 </script>
