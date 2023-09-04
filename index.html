@@ -19,6 +19,7 @@
       left:50%;
       transform:translate(-50%, -50%);
       border:1px solid rgb(150, 150, 150);
+
     }
 
     .embed {
@@ -32,7 +33,6 @@
       left:50%;
       transform:translate(-50%, -50%);
       overflow:hidden;
-
       border-radius:60px;
       display:flex;
       align-items:center;
@@ -71,18 +71,29 @@
       left:50%;
       transform:translateX(-50%);
       top:82vh;
+      width:100vw;
+    }
+
+    p {
+      color:white;
+      font-family:verdana;
+      font-size:6vw;
+      text-align:center;
+      margin:0;
     }
 
     #switcher {
       color:rgb(100, 200, 200);
       font-family:verdana;
-      font-size:12vh;
+      font-size:6vw;
     }
 
     #blinker {
       color:rgb(100, 200, 200);
       font-family:verdana;
-      font-size:12vh;
+      font-size:6vw;
+      position:relative;
+      left:-2%;
       animation:blinking 1200ms infinite;
     }
 
@@ -120,8 +131,9 @@
 </div>
 </div>
 <div class="switchEmbed">
+<p>Strive to be
 <span id="switcher">PERPLEXED</span>
-<span id="blinker">|</span>
+<span id="blinker">|</span></p>
 </div>
 <script>
 let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
