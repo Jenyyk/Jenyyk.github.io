@@ -2,11 +2,10 @@
 <html lang="cs" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <link href="favicon.ico" rel="icon">
+  <link href="assets/favicon.ico" rel="icon">
   <title>Effect gallery</title>
   <style>
     body {
-      overflow:hidden;
       margin:0;
       background-color:rgb(6, 6, 20)
     }
@@ -71,7 +70,7 @@
       left:50%;
       transform:translateX(-50%);
       top:82vh;
-      width:100vw;
+      width:90vw;
     }
 
     p {
@@ -95,6 +94,22 @@
       position:relative;
       left:-2%;
       animation:blinking 1200ms infinite;
+    }
+
+    ::-webkit-scrollbar {
+    width: .7vw;
+    padding:20px;
+    }
+
+    ::-webkit-scrollbar-track {
+    border:solid 1px white;
+    border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 5px white;
+    border-radius: 10px;
+    width:80%;
     }
 
     @media (max-width:1200px) {
@@ -121,20 +136,69 @@
       }
     }
 
+    .contentWrapper {
+      width:80%;
+      position:relative;
+      left:50%;
+      transform:translateX(-50%);
+      border: 1px solid rgb(150, 150, 150);
+      border-radius:30px;
+      padding:20px;
+    }
+
+    .contentWrapper * {
+      margin:5px;
+    }
+
+    .contentHeading {
+      color:white;
+      margin:0;
+      font-family:"rubik",sans-serif;
+      font-weight:normal;
+    }
+
+    .contentDesc {
+      color:white;
+      font-size:100%;
+      text-align:left;
+    }
+
+    .contentImg {
+      position:relative;
+      width:15%;
+    }
+
+    a {
+      text-decoration:none;
+    }
+
   </style>
 </head>
 <body onload="loadFnc()">
+
 <div class="wrapper">
 <div class="embed">
 <span href="" id="text"></span>
-<img id="logo" src="logo.png">
+<img id="logo" src="assets/logo.png">
 </div>
 </div>
+
 <div class="switchEmbed">
 <p>Strive to be
 <span id="switcher">PERPLEXED</span>
 <span id="blinker">|</span></p>
 </div>
+
+<div style="position:relative;height:100vh;pointer-events:none;"></div>
+
+<a href="SubSites/piCheckr.html">
+<div class="contentWrapper">
+<h1 class="contentHeading">πCheckr</h1>
+<p class="contentDesc">Input all the digits of pi you know and have the site check them for corectness in real time!</p>
+<img class="contentImg" src="assets/piCheckrImg.png">
+</div>
+</a>
+
 <script>
 let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 let messages = ["PERPLEXED","MYSTIFIED","INTRIGUED","INQUIRING","DETERMINED","REMARKABLE","ENTRACING"]

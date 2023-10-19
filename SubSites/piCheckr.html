@@ -56,7 +56,7 @@
 </head>
 <body onload="loadFnc()">
 <a href="../index.html">Home</a>
-<h1>Pi Checkr</h1>
+<h1>πCheckr</h1>
 <input id="piInput" value="3.">
 <p class="digitDisplay">You are on decimal digit number <span id="digitDisplay">0</span></p>
 <script>
@@ -75,7 +75,7 @@
       inputElem.style.color="red"
       setTimeout(() => inputElem.style.color="black", 1000)
     }
-    document.getElementById("digitDisplay").innerHTML = inputElem.value.length - 2
+    document.getElementById("digitDisplay").innerHTML = Math.max(inputElem.value.length - 2, 0)
   }
 </script>
 </body>
