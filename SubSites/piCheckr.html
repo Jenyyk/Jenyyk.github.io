@@ -75,7 +75,7 @@
       inputElem.style.color="red"
       setTimeout(() => inputElem.style.color="black", 1000)
     }
-    document.getElementById("digitDisplay").innerHTML = inputElem.value.length - 2
+    document.getElementById("digitDisplay").innerHTML = max(inputElem.value.length - 2, 0)
   }
 </script>
 </body>
