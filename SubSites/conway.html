@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="cs" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+  table {
+    width:100%;
+  }
+
+  td {
+    font-size:30px;
+  }
+</style>
+</head>
+<body onload="loadFnc()">
+<input placeholder="width" id="widthInput">
+<input placeholder="height" id="heightInput">
+<button onclick="genTable()">GENERATE TABLE</button>
+<table></table>
+<button onclick="tick()">TICK</button>
+<button onclick="startInterval()">AUTO</button>
+<button onclick="stopInterval()">STOP</button>
+<script>
+let intervals = []
+  let cells = document.getElementsByTagName("td")
+
+function genTable() {
+  document.querySelectorAll("tr, td").forEach((element) => element.remove())
+  for (let currY = 1; currY <= document.getElementById("heightInput").value; currY++) {
+    let row = document.createElement("tr")
+    for (let currX = 1; currX <= document.getElementById("widthInput").value; currX++) {
+      let td = document.createElement("td")
+      td.id = currY + "x" + currX
+      td.class = "cell"
+      td.dataset.future = "0"
+      td.innerHTML = "0"
+      row.appendChild(td)
+    }
+    document.getElementsByTagName("table")[0].appendChild(row)
+  }
+  loadFnc()
+}
+
+function loadFnc() {
+  color()
+  for (let i=0; i<cells.length; i++) {
+    cells[i].addEventListener("click", function() {
+      if (this.innerHTML == "1") {
+        this.innerHTML = "0"
+      } else {
+        this.innerHTML = "1"
+      }
+      color()
+    })
+  }
+}
+
+function god(id,state) {
+  document.getElementById(id).innerHTML = state
+  color()
+}
+
+function color() {
+  for (let i=0; i<cells.length; i++) {
+    if (cells[i].innerHTML == "0") {
+      cells[i].style.backgroundColor = "black"
+      cells[i].style.color = "white"
+    } else {
+      cells[i].style.backgroundColor = "white"
+      cells[i].style.color = "black"
+    }
+  }
+}
+
+function countNeighbors(id) {
+  voidArr = id.split("x")
+  y = parseInt(voidArr[0])
+  x = parseInt(voidArr[1])
+  neighbors = []
+  neighbors.push((y-1)+"x"+(x-1),
+  (y-1)+"x"+x,
+  (y-1)+"x"+(x+1),
+  y+"x"+(x-1),
+  y+"x"+(x+1),
+  (y+1)+"x"+(x-1),
+  (y+1)+"x"+x,
+  (y+1)+"x"+(x+1)
+  );
+  let alive = 0
+  for (let i=0; i<neighbors.length; i++) {
+    try {
+      if (document.getElementById(neighbors[i]).innerHTML == "1") {
+        alive += 1
+      }
+    } catch {}
+  }
+  return alive
+}
+
+function tick() {
+  for (let i=0; i < cells.length; i++) {
+    liveNeighbors = countNeighbors(cells[i].id)
+    if (cells[i].innerHTML == "1") {
+      if (liveNeighbors <= 1) {
+        cells[i].dataset.future = "0"
+      } else if (liveNeighbors >= 4) {
+        cells[i].dataset.future = "0"
+      } else {
+        cells[i].dataset.future = "1"
+      }
+    } else if (liveNeighbors == 3) {
+      cells[i].dataset.future = "1"
+    }
+    console.log(i)
+  }
+  for (let i=0; i < cells.length; i++) {
+    cells[i].innerHTML = cells[i].dataset.future
+  }
+  color()
+}
+
+function startInterval() {
+  intervals.push(setInterval(tick, 100))
+}
+
+function stopInterval() {
+  for (let i=0; i<intervals.length; i++) {
+    clearInterval(intervals[i])
+  }
+}
+</script>
+</body>
+</html>
