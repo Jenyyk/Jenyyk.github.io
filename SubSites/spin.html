@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="cs" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body onload="loadFnc()">
+<div id="parent">
+<input type="text" style="width:50vw;" value="I love stealing cookies kekw   " id="sourceText">
+<br>
+<p>angle:</p>
+<input value="360" type="range" id="angle" min="1" max="360">
+<br>
+<p>radius:</p>
+<input  value="200" type="range" id="radius" min="10" max="400">
+</div>
+<script>
+
+parent = document.getElementById("parent")
+
+function loadFnc() {
+  document.querySelectorAll("input").forEach((element) => element.addEventListener("input", spinIt))
+  spinIt()
+}
+
+function spinIt() {
+  document.querySelectorAll("span").forEach((element) => element.remove())
+  text = document.getElementById("sourceText").value.split("")
+  radius = document.getElementById("radius").value
+  oneAngle = document.getElementById("angle").value/text.length
+  for (let i=0; i<text.length; i++) {
+    letter = document.createElement("span")
+    letter.innerHTML = text[i]
+    letter.style.position = "absolute"
+    letter.style.left = radius*cos((oneAngle*i)-90) + window.innerWidth/2 + "px"
+    letter.style.top = radius*sin((oneAngle*i)-90)+ window.innerHeight/2 + "px"
+    letter.style.transform = "rotate(" + (oneAngle*i) + "deg)"
+    parent.appendChild(letter)
+  }
+}
+
+function sin(degrees) {
+  return Math.sin((degrees * Math.PI) / 180);
+}
+
+function cos(degrees) {
+  return Math.cos((degrees * Math.PI) / 180);
+}
+</script>
+</body>
+</html>
