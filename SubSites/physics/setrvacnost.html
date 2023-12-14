@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="cs" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title>physics</title>
+<style>
+  #ball {
+    height:100px;
+    width:100px;
+    border-radius:50px;
+    background-image:url("basketball.png");
+    background-size:100%;
+    position:absolute;
+    top:50px;
+    left:50px;
+    transform:rotate(0deg)
+  }
+
+  body {
+    background:rgb(5,10,24);
+    overflow:hidden;
+  }
+</style>
+</head>
+<body>
+<div id="ball"></div>
+<button onclick="startSim(ball)" style="position:absolute;left:300px;">zapni gravitaci</button>
+<script>
+  const ball = document.getElementById("ball")
+  let bottomWall = window.innerHeight - 100
+  let rightWall = window.innerWidth - 100
+  let ySpeed = 0
+  let ySpeedBounce
+  let xSpeed = 0
+  let angle = 0
+  let startTime
+  let playing = 0
+  ball.style.top = "0px"
+  ball.style.left = "0px"
+  let tickLength = 20
+
+  function startSim(element) {
+    gravity(element)
+    xSpeed = Math.random() * 50
+    sideways(element)
+    rotate(element)
+  }
+
+  async function gravity(element) {
+    if (parseInt(element.style.top.replace("px","")) <= bottomWall) {
+      startTime = Date.now()
+      while (parseInt(element.style.top.replace("px","")) < bottomWall) {
+        ySpeed = 0.05*(Date.now() - startTime)
+        element.style.top = Math.min((parseInt(element.style.top.replace("px","")) + ySpeed), bottomWall) + "px"
+        await sleep(tickLength)
+      }
+      ySpeedBounce = -5
+      while (true) {
+        while (ySpeedBounce < (-3)) {
+          ySpeedBounce = ySpeed * (-0.5)
+          ySpeed = 0
+          startTime = Date.now()
+          element.style.top = (parseInt(element.style.top.replace("px","")) - 1) + "px"
+          playSound(ySpeedBounce * -0.04)
+          while (parseInt(element.style.top.replace("px","")) < bottomWall) {
+            ySpeed = ySpeedBounce + 0.05*(Date.now() - startTime)
+            element.style.top = Math.min((parseInt(element.style.top.replace("px","")) + ySpeed), bottomWall) + "px"
+            await sleep(tickLength)
+            console.log(ySpeedBounce)
+          }
+        }
+        await sleep(tickLength)
+      }
+    }
+  }
+
+  async function sideways(element) {
+    element.style.left = Math.min((parseInt(element.style.left.replace("px","")) + xSpeed), rightWall) + "px"
+    while (true) {
+      while (parseInt(element.style.left.replace("px","")) < rightWall && parseInt(element.style.left.replace("px","")) > 0) {
+        element.style.left = Math.max(Math.min((parseInt(element.style.left.replace("px","")) + xSpeed), rightWall), 0) + "px"
+        await sleep(tickLength)
+      }
+      xSpeed = xSpeed * (-0.5)
+      element.style.left = Math.max(Math.min((parseInt(element.style.left.replace("px","")) + xSpeed), rightWall), 0) + "px"
+      playSound(Math.abs(xSpeed) / 20)
+      await sleep(tickLength)
+    }
+  }
+
+  async function rotate(element) {
+    while (true) {
+      angle += xSpeed
+      element.style.transform = `rotate(${angle}deg)`
+      await sleep(tickLength)
+    }
+  }
+
+  function playSound(volume = 0.1) {
+    if (playing < 2) {
+      console.log(volume)
+      var audio = new Audio(`audio/audio${1+Math.floor(Math.random()*6)}.mp3`)
+      audio.volume = Math.max(Math.min(volume, 0.6), 0.1)
+      audio.play()
+      playing += 1
+      audio.addEventListener('ended', function(){playing -= 1})
+    }
+  }
+
+  launchBall = e => {
+    cursorX = e.clientX
+    cursorY = e.clientY
+    ballX = parseInt(ball.style.left.replace("px","")) + 50
+    ballY = parseInt(ball.style.top.replace("px","")) + 50
+    xSpeed = (cursorX - ballX)/20
+    startTime = Date.now()
+    ySpeed = (ballY - cursorY)/20
+    ySpeedBounce += (cursorY - ballY)/20
+  }
+
+  document.addEventListener("click", launchBall);
+
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+</script>
+</body>
+</html>
