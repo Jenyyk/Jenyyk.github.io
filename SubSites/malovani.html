@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="cs" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+  .point {
+    width:5px;
+    height:5px;
+    aspect-ratio:1:1;
+    background-color:black;
+    position:absolute;
+    left:0px;
+    top:0px;
+    pointer-events:none;
+    border-radius:50%;
+  }
+
+  #parentDiv {
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0px;
+    left:0px;
+    z-index:-2;
+  }
+</style>
+</head>
+<body>
+<input id="sizeInput" type="range" min="1" max="50" value="2"><span>size</span><br>
+  <input type="radio" name="colors" id="red"><span>red</span>
+  <input type="radio" name="colors" id="black" checked><span>black</span>
+  <input type="radio" name="colors" id="blue"><span>blue</span>
+<div id="parentDiv"></div>
+<script>
+  document.addEventListener("mousemove", paint)
+  parentDiv = document.getElementById("parentDiv")
+  let existingPoints = []
+  function paint(e) {
+    cursorX = e.clientX
+    cursorY = e.clientY
+    if (mouseDown == 0) {
+      return
+    }
+    size = parseInt(document.getElementById("sizeInput").value)
+    if (existingPoints.includes(`${cursorX - size/2} + ${cursorY - size/2}`)) {
+      return
+    }
+    existingPoints.push(`${cursorX - size/2} + ${cursorY - size/2}`)
+    point = document.createElement("div")
+    point.setAttribute("class", "point")
+    point.style.left = `${cursorX - size/2}px`
+    point.style.top = `${cursorY - size/2}px`
+    point.style.width = `${size}px`
+    point.style.height = `${size}px`
+    document.querySelectorAll('input[type="radio"]').forEach((element) => {if (element.checked){point.style.backgroundColor = element.id}})
+    parentDiv.appendChild(point)
+  }
+
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  let mouseDown = 0
+  parentDiv.addEventListener("mousedown", function() {mouseDown = 1})
+  parentDiv.addEventListener("mouseup", function() {mouseDown = 0})
+</script>
+</body>
+</html>
