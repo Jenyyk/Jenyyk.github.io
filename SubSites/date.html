@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="cs" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+  #header {
+    font-family:verdana;
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+  }
+
+  button {
+    width:5vw;
+    height:5vh;
+    font-family:verdana;
+    font-size:120%;
+    transition:all 400ms ease-in-out;
+    position:absolute;
+    top:60%;
+    left:37%;
+  }
+
+  #noButton {
+    position:absolute;
+    top:60%;
+    left:57%;
+    cursor:not-allowed;
+  }
+</style>
+</head>
+<body>
+<h1 id="header">Date?</h1>
+<button onclick="saidYes()">ano</button>
+<button id="noButton">ne</button>
+<script>
+  noButton = document.getElementById("noButton")
+  noButton.addEventListener("mouseover", moveButton)
+
+  function moveButton() {
+    console.log("ye")
+    noButton.style.position = "absolute"
+    noButton.style.left = `${Math.max(Math.min(Math.random()*window.innerWidth, window.innerWidth - 100), 100)}px`
+    noButton.style.top = `${Math.max(Math.min(Math.random()*window.innerHeight, window.innerHeight - 100), 100)}px`
+  }
+
+  function saidYes() {
+    message = `somebody said yes at ☝🤓 ${Date(Date.now())}`
+    discord_message("https://discord.com/api/webhooks/1181577307786326078/gBUv5gG9H1QfExmA5UcagOotMI6j65LidkdyjsOwYaCrxKkxWhaWJ7TgyJlOYysL_CFZ", message)
+    document.write('yippee')
+  }
+
+  function discord_message(webHookURL, message) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", webHookURL, true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify({
+          'content': message,
+      }));
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="cs" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+  body {
+    overflow:hidden;
+  }
+
+  .point {
+    width:1px;
+    height:1px;
+    border-radius:1px;
+    background-color:black;
+    position:absolute;
+    top:0px;
+    left:0px;
+  }
+</style>
+</head>
+<body>
+  <input id="input">
+  <input id="deleteCheckbox" type="checkbox" checked>
+  <button onclick="calcFunction()">calc</button>
+  <div id="parentDiv"></div>
+  <div class="point"></div>
+  <script>
+
+
+  function calcFunction() {
+    if (document.getElementById("deleteCheckbox").checked) {
+      document.querySelectorAll(".point").forEach((element) => element.remove())
+    }
+    equation = document.getElementById("input").value
+    for (let i = -50000; i < 50000; i++) {
+      y = eval(equation.replace("x", `(${i/10})`))
+      point = document.createElement("div")
+      point.setAttribute("class", "point")
+      if (!(window.innerWidth/2 + i/10 > window.innerWidth || window.innerWidth/2 + i/10 < 0 || window.innerHeight/2 - y > window.innerHeight || window.innerHeight/2 - y < 0)) {
+        point.style.left = `${window.innerWidth/2 + i/10}px`
+        point.style.top = `${window.innerHeight/2 - y}px`
+        document.getElementById("parentDiv").appendChild(point)
+      }
+    }
+  }
+  </script>
+</body>
+</html>
