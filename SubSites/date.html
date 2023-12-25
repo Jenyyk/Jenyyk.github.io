@@ -33,13 +33,12 @@
 <body>
 <h1 id="header">Date?</h1>
 <button onclick="saidYes()">ano</button>
-<button id="noButton">ne</button>
+<button id="noButton" onclick="moveButton()">ne</button>
 <script>
   noButton = document.getElementById("noButton")
   noButton.addEventListener("mouseover", moveButton)
 
   function moveButton() {
-    console.log("ye")
     noButton.style.position = "absolute"
     noButton.style.left = `${Math.max(Math.min(Math.random()*window.innerWidth, window.innerWidth - 100), 100)}px`
     noButton.style.top = `${Math.max(Math.min(Math.random()*window.innerHeight, window.innerHeight - 100), 100)}px`
