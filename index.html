@@ -136,15 +136,20 @@
       }
     }
 
+    #contentGrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+    }
+
     .contentWrapper {
-      width:80%;
+      width:calc(100% - 20);
       position:relative;
       left:50%;
       transform:translateX(-50%);
       border: 1px solid rgb(150, 150, 150);
       border-radius:30px;
       padding:20px;
-      margin:20px;
     }
 
     .contentWrapper * {
@@ -162,11 +167,6 @@
       color:white;
       font-size:100%;
       text-align:left;
-    }
-
-    .contentImg {
-      position:relative;
-      width:15%;
     }
 
     a {
@@ -215,11 +215,12 @@
 
 
 
+
+<div id="contentGrid">
 <a href="SubSites/piCheckr.html">
 <div class="contentWrapper">
 <h1 class="contentHeading">πCheckr</h1>
 <p class="contentDesc">Input all the digits of pi you know and have the site check them for corectness in real time!</p>
-<img class="contentImg" src="assets/piCheckrImg.png">
 </div>
 </a>
 
@@ -227,15 +228,13 @@
 <div class="contentWrapper">
 <h1 class="contentHeading">Conway's Game of Life</h1>
 <p class="contentDesc">The classic game of life, with a cusomizable table size and all the classic rules!</p>
-<img class="contentImg" src="assets/conwayImg.png">
 </div>
 </a>
 
 <a href="SubSites/spin.html">
 <div class="contentWrapper">
-<h1 class="contentHeading">Spins your sentence in a circle!</h1>
+<h1 class="contentHeading">Spin your sentence in a circle!</h1>
 <p class="contentDesc">Not much to say about it, does excatly as advertised with a lot of customisations to play with.</p>
-<img class="contentImg" src="assets/spinImg.png">
 </div>
 </a>
 
@@ -243,14 +242,15 @@
 <div class="contentWrapper">
 <h1 class="contentHeading">Actual Basketball simulation</h1>
 <p class="contentDesc">You are given a basketball with accurate physics. Click to attract basketball to your cursor! I dont recommend starting gravity multiple times.</p>
-<img class="contentImg" src="assets/basketBallImg.png">
 </div>
 </a>
+</div>
 
 <script>
 let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 let messages = ["PERPLEXED","MYSTIFIED","INTRIGUED","INQUIRING","DETERMINED","REMARKABLE","ENTRACING"]
 let last = "PERPLEXED"
+let slowOffset = 0
 
 function loadFnc() {
   window.addEventListener('mousemove', genText)
@@ -305,8 +305,9 @@ function addLetter() {
   }
 }
 
-function backgroundMoveFnc() {
-  document.getElementById("backgroundText").style.top = -(document.documentElement.scrollTop / 4)+"px"
+async function backgroundMoveFnc() {
+  document.getElementById("backgroundText").style.top = -(document.documentElement.scrollTop / 4) + slowOffset +"px"
+  slowOffset -= 0.2
 }
 </script>
 </body>
