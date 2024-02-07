@@ -625,5 +625,7 @@ characters = [
   },
 ]
 
+//logs all the character names for use in the autocorrect
+//could be removed with a bit more javascript but meh
 characterNames = []
 characters.forEach((character) => characterNames.push(character.name))
