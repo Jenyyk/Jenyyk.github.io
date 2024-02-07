@@ -48,7 +48,7 @@ function runAutocorrect() {
     if (characterNames[i].startsWith(input) && characterNames[i] != input) {
       suggestion = document.createElement("button")
       suggestion.innerHTML = characterNames[i]
-      suggestion.setAttribute("onclick", `document.getElementById("input").value = "${characterNames[i]}";runAutocorrect()`)
+      suggestion.setAttribute("onclick", `document.getElementById("input").value = "${characterNames[i]}";guess();runAutocorrect()`)
       suggestion.setAttribute("class", "suggestion")
       singularBreak = document.createElement("br")
       document.getElementById("inputHouse").appendChild(singularBreak)
