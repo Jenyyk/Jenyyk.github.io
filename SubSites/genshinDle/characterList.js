@@ -624,3 +624,6 @@ characters = [
     weapon: "Polearm"
   },
 ]
+
+characterNames = []
+characters.forEach((character) => characterNames.push(character.name))

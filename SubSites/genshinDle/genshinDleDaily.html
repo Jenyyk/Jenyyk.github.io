@@ -18,6 +18,7 @@
     color:white;
     font-size:1.3em;
     cursor:pointer;
+    width:20vw;
   }
 
   #input:focus {
@@ -28,6 +29,18 @@
     font-family:verdana;
     height:6vh;
     border:3px solid cyan;
+    border-radius:2px;
+    background-color:gray;
+    color:white;
+    width:5vw;
+  }
+
+  .suggestion {
+    width:25vw;
+    position:absolute;
+    font-family:verdana;
+    border:solid cyan;
+    border-width:0 3px 3px 3px;
     border-radius:2px;
     background-color:gray;
     color:white;
@@ -109,8 +122,10 @@
 <h1 style="font-family:verdana;font-size:600%;padding:0;color:white;text-align:center;margin-bottom:0;">GenshinDle!</h1>
 <h2 style="font-family:verdana;padding:0;color:white;text-align:center;">Daily characters!</h2>
 <div style="display:flex;justify-content:space-around;margin-bottom:30px;">
-<div>
-<input type="text" id="input" placeholder="type a character...">
+<div style="display:flex;">
+<div id="inputHouse">
+<input type="search" id="input" placeholder="type a character...">
+</div>
 <button onclick="guess()" id="guessBtn">GUESS</button>
 </div>
 </div>
@@ -135,11 +150,38 @@ function getTodaysCharacter() {
   return characters[Math.min(Math.max(scaledRandom < 0 ? range + scaledRandom : scaledRandom, 0), characters.length)];
 }
 
-characterToGuess = getTodaysCharacter()
+let characterToGuess = getTodaysCharacter()
+let existingSuggestions = []
 if (JSON.stringify(characterToGuess) == localStorage.getItem("lastGuessed")) {
   guess(characterToGuess.name)
 }
+
 setInterval(timeUntilNewCharacter, 200)
+
+document.getElementById("input").addEventListener("input", runAutocorrect)
+
+function runAutocorrect() {
+  existingSuggestions.forEach((suggestionElement) => suggestionElement.remove())
+  if (document.getElementById("input").value == "") {return}
+  input = document.getElementById("input").value.split(" ")
+  for (let i = 0; i < input.length; i += 1) {
+    input[i] = input[i][0].toUpperCase() + input[i].slice(1)
+  }
+  input = input.join(" ")
+  for (let i = 0; i < characterNames.length; i++) {
+    if (characterNames[i].startsWith(input) && characterNames[i] != input) {
+      suggestion = document.createElement("button")
+      suggestion.innerHTML = characterNames[i]
+      suggestion.setAttribute("onclick", `document.getElementById("input").value = "${characterNames[i]}";runAutocorrect()`)
+      suggestion.setAttribute("class", "suggestion")
+      singularBreak = document.createElement("br")
+      document.getElementById("inputHouse").appendChild(singularBreak)
+      document.getElementById("inputHouse").appendChild(suggestion)
+      existingSuggestions.push(suggestion)
+      existingSuggestions.push(singularBreak)
+    }
+  }
+}
 
 document.getElementById("input").onkeydown = function(e) {
   if (e.key == "Enter") {guess()}
@@ -173,6 +215,7 @@ function guess(input = document.getElementById("input").value) {
   }
   document.getElementById("parentDiv").insertBefore(flexDiv, document.getElementById("parentDiv").firstChild)
   document.getElementById("input").value = ""
+  runAutocorrect()
   if (guessedCharacter == characterToGuess) {
     setTimeout(wonFunction, 2200)
     localStorage.setItem("lastGuessed", JSON.stringify(characterToGuess))
