@@ -464,7 +464,7 @@ characters = [
     weapon: "Polearm"
   },
   {
-    name: "Shikakoin Heizhou",
+    name: "Shikanoin Heizhou",
     gender: "Male",
     region: "Inazuma",
     rarity: "4 star",
