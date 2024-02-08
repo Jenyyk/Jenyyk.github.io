@@ -64,7 +64,7 @@ characters = [
     weapon: "Claymore"
   },
   {
-    name: "Bennet",
+    name: "Bennett",
     gender: "Male",
     region: "Mondstadt",
     rarity: "4 star",
