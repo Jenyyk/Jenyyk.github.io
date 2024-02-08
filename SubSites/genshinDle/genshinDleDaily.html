@@ -42,6 +42,8 @@ function getTodaysCharacter() {
 
 let characterToGuess = getTodaysCharacter()
 let existingSuggestions = []
+let alreadyGuessed = []
+
 if (JSON.stringify(characterToGuess) == localStorage.getItem("lastGuessed")) {
   guess(characterToGuess.name)
 }
@@ -53,16 +55,18 @@ document.getElementById("input").addEventListener("input", runAutocorrect)
 function runAutocorrect() {
   existingSuggestions.forEach((suggestionElement) => suggestionElement.remove())
   if (document.getElementById("input").value == "") {return}
-  input = document.getElementById("input").value.split(" ")
+  input = document.getElementById("input").value
+  if (input[input.length - 1] == " ") {input = input.slice(0, input.length-1)}
+  input = input.split(" ")
   for (let i = 0; i < input.length; i += 1) {
     input[i] = input[i][0].toUpperCase() + input[i].slice(1)
   }
   input = input.join(" ")
   for (let i = 0; i < characterNames.length; i++) {
-    if (characterNames[i].startsWith(input) && characterNames[i] != input) {
+    if (characterNames[i].startsWith(input) && characterNames[i] != input && !(alreadyGuessed.includes(characterNames[i]))) {
       suggestion = document.createElement("button")
       suggestion.innerHTML = characterNames[i]
-      suggestion.setAttribute("onclick", `document.getElementById("input").value = "${characterNames[i]}";guess();runAutocorrect()`)
+      suggestion.setAttribute("onclick", `document.getElementById("input").value = "${characterNames[i]}";guess()`)
       suggestion.setAttribute("class", "suggestion")
       singularBreak = document.createElement("br")
       document.getElementById("inputHouse").appendChild(singularBreak)
@@ -74,7 +78,13 @@ function runAutocorrect() {
 }
 
 document.getElementById("input").onkeydown = function(e) {
-  if (e.key == "Enter") {guess()}
+  if (e.key == "Enter") {
+    try {
+      guess()
+    } catch (TypeError) {
+      guess(document.querySelector("button").innerHTML)
+    }
+  }
 }
 
 function guess(input = document.getElementById("input").value) {
@@ -106,6 +116,8 @@ function guess(input = document.getElementById("input").value) {
   document.getElementById("parentDiv").insertBefore(flexDiv, document.getElementById("parentDiv").firstChild)
   document.getElementById("input").value = ""
   runAutocorrect()
+  alreadyGuessed.push(input)
+
   if (guessedCharacter == characterToGuess) {
     setTimeout(wonFunction, 2200)
     localStorage.setItem("lastGuessed", JSON.stringify(characterToGuess))
