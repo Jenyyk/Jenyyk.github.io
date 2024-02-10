@@ -44,8 +44,8 @@ let characterToGuess = getTodaysCharacter()
 let existingSuggestions = []
 let alreadyGuessed = []
 
-if (JSON.stringify(characterToGuess) == localStorage.getItem("lastGuessed")) {
-  guess(characterToGuess.name)
+if (Math.floor(+Date.now()/86400000) == localStorage.getItem("lastGuessedTime")) {
+  JSON.parse(localStorage.getItem("lastGuessedCharacters")).forEach((guessedCharacter) => guess(guessedCharacter))
 }
 
 setInterval(timeUntilNewCharacter, 200)
@@ -117,10 +117,11 @@ function guess(input = document.getElementById("input").value) {
   document.getElementById("input").value = ""
   runAutocorrect()
   alreadyGuessed.push(input)
+  localStorage.setItem("lastGuessedCharacters", JSON.stringify(alreadyGuessed))
+  localStorage.setItem("lastGuessedTime", Math.floor(+Date.now()/86400000))
 
   if (guessedCharacter == characterToGuess) {
     setTimeout(wonFunction, 2200)
-    localStorage.setItem("lastGuessed", JSON.stringify(characterToGuess))
   }
 }
 
