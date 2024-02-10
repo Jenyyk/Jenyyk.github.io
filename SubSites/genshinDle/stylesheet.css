@@ -2,6 +2,25 @@ body {
   background-color: rgb(6, 11, 24);
 }
 
+.winModal {
+  position:fixed;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  display:none;
+  border:2px solid white;
+  border-radius:10px;
+  padding:10px 40px;
+  z-index:3;
+  background-color:rgb(6, 11, 24);
+  animation:flyIn 500ms ease-out;
+}
+
+.winModal h1, .winModal h2 {
+  text-align:center;
+  color:white;
+  font-family:verdana;
+}
+
 #input {
   font-family:verdana;
   height:6vh;
@@ -79,6 +98,11 @@ p {
   font-family:verdana;
 }
 
+h1, h2 {
+  color:white;
+  font-family:verdana;
+}
+
 .oneBox:nth-child(2) {
   animation-delay:300ms
 }
@@ -104,5 +128,13 @@ p {
     transform:scaleY(0);
   } to {
     transform:scaleY(1);
+  }
+}
+
+@keyframes flyIn {
+  from {
+    top:-20%;
+  } to {
+    top:50%;
   }
 }
