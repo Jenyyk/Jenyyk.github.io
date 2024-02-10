@@ -9,8 +9,8 @@
 <body id="body">
 <a href="genshinDleRandom.html" style="font-family:verdana;color:white;padding:10px;">Go to Random Infinite version</a>
 <p style="font-family:verdana;padding:0;color:white;padding:0 10px;">Time until new character: <span id="newCharacterTimer"></span></p>
-<h1 style="font-family:verdana;font-size:600%;padding:0;color:white;text-align:center;margin-bottom:0;">GenshinDle!</h1>
-<h2 style="font-family:verdana;padding:0;color:white;text-align:center;">Daily characters!</h2>
+<h1 style="font-size:600%;padding:0;text-align:center;margin-bottom:0;">GenshinDle!</h1>
+<h2 style="padding:0;text-align:center;">Daily characters!</h2>
 <div style="display:flex;justify-content:space-around;margin-bottom:30px;">
 <div style="display:flex;">
 <div id="inputHouse">
@@ -19,6 +19,13 @@
 <button onclick="guess()" id="guessBtn">GUESS</button>
 </div>
 </div>
+<div class="winModal" id="winModal">
+  <h1 style="margin-bottom:0;">Victory!</h1>
+  <h2 style="margin:0;">Come back tommorow!</h2>
+  <h2 style="margin-top:0;">Or try the <a href="genshinDleRandom.html" style="color:white;">Infinite version</a>!</h2>
+  <h2 style="font-size:50%;">click in the blank area to close</h2>
+</div>
+<div id="modalCloseDiv" onclick="document.getElementById('winModal').style.display = 'none';document.getElementById('modalCloseDiv').style.display = 'none'" style="display:none;position:absolute;width:100vw;height:100vh;top:0;left:0;"></div>
 <div class="parentDiv">
   <div class="guessBar">
     <span>Character</span>
@@ -126,8 +133,8 @@ function guess(input = document.getElementById("input").value) {
 }
 
 function wonFunction() {
-  console.log("won")
-  window.alert("yippi")
+  document.getElementById("winModal").style.display = "block"
+  document.getElementById("modalCloseDiv").style.display = "block"
 }
 
 function timeUntilNewCharacter() {
