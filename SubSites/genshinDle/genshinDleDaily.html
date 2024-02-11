@@ -41,10 +41,10 @@
 <script>
 function getTodaysCharacter() {
   seed = Math.floor(+Date.now()/86400000)
-  const range = characters.length + 1;
+  const range = characters.length;
   const x = Math.sin(seed++) * 10000;
   const scaledRandom = Math.floor((x - Math.floor(x)) * range);
-  return characters[Math.min(Math.max(scaledRandom < 0 ? range + scaledRandom : scaledRandom, 0), characters.length)];
+  return characters[Math.min(Math.max(scaledRandom < 0 ? range + scaledRandom : scaledRandom, 0), characters.length - 1)];
 }
 
 let characterToGuess = getTodaysCharacter()
