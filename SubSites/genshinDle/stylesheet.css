@@ -25,6 +25,17 @@ body {
   margin:0;
 }
 
+.statButton {
+  position:absolute;
+  right:20px;
+  top:20px;
+  background-color:#00000000;
+  border:none;
+}
+.statButton:active {
+  transform:scale(0.9);
+}
+
 #input {
   font-family:verdana;
   height:6vh;
