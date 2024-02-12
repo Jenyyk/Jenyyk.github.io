@@ -8,6 +8,7 @@
 </head>
 <body id="body">
 <a href="genshinDleDaily.html" style="font-family:verdana;color:white;padding:10px;">Go to Daily version</a>
+<button class="statButton" onclick="document.getElementById('statsModal').style.display = 'block';updateStats();document.getElementById('modalCloseDiv').style.display = 'block'"><img src="statsIcon.png" style="width:5vw;"></button>
 <h1 style="font-size:600%;padding:0;text-align:center;margin-bottom:0;">GenshinDle!</h1>
 <h2 style="padding:0;text-align:center;">Infinite random characters!</h2>
 <div style="display:flex;justify-content:space-around;margin-bottom:30px;">
@@ -22,12 +23,20 @@
   <h1 style="margin-bottom:0;">Victory!</h1>
   <h2 style="margin:0;">Come back tommorow!</h2>
   <h2 style="margin-top:0;">Or try the <a href="genshinDleRandom.html" style="color:white;">Daily version</a>!</h2>
+  <h2><a href="genshinDleRandom.html" style="color:white;">PLAY AGAIN!</a></h2>
   <h3>stats:</h3>
   <div class="stats">
-    <h3>Total played: <span id="totalGuess">0</span></h3>
-    <h3>Average guesses: <span id="averageGuess">0</span></h3>
+    <h3>Total played: <span class="totalGuessSpans">0</span></h3>
+    <h3>Average guesses: <span class="averageGuessSpans">0</span></h3>
   </div>
   <h2 style="font-size:50%;">click in the blank area to close</h2>
+</div>
+<div class="modal" id="statsModal">
+  <h2>stats:</h2>
+  <div class="stats">
+    <h3>Total played: <span class="totalGuessSpans">0</span></h3>
+    <h3>Average guesses: <span class="averageGuessSpans">0</span></h3>
+  </div>
 </div>
 <div id="modalCloseDiv" onclick="document.querySelectorAll('.modal').forEach((modal) => modal.style.display = 'none');document.getElementById('modalCloseDiv').style.display = 'none'" style="display:none;position:absolute;width:100vw;height:100vh;top:0;left:0;"></div>
 <div class="parentDiv">
@@ -121,6 +130,8 @@ function guess(input = document.getElementById("input").value) {
 }
 
 function wonFunction() {
+  document.getElementById("input").setAttribute("disabled","")
+  document.getElementById("input").setAttribute("placeholder","refresh to play again")
   document.getElementById("winModal").style.display = "block"
   document.getElementById("modalCloseDiv").style.display = "block"
   localStorage.setItem("averageInfiniteGuess", ((+localStorage.getItem("averageInfiniteGuess")* +localStorage.getItem("totalInfiniteGuess")+ +alreadyGuessed.length)/ (+localStorage.getItem("totalInfiniteGuess")+1)))
@@ -129,9 +140,8 @@ function wonFunction() {
 }
 
 function updateStats() {
-  document.getElementById("totalGuess").innerHTML = localStorage.getItem("totalInfiniteGuess")
-  document.getElementById("averageGuess").innerHTML = Math.floor(+localStorage.getItem("averageInfiniteGuess")*10)/10
-  document.getElementById("streak").innerHTML = localStorage.getItem("dailyStreak")
+  document.querySelectorAll(".totalGuessSpans").forEach((span) => span.innerHTML = localStorage.getItem("totalInfiniteGuess"))
+  document.querySelectorAll(".averageGuessSpans").forEach((span) => span.innerHTML = Math.floor(+localStorage.getItem("averageInfiniteGuess")*10)/10)
 }
 
 
