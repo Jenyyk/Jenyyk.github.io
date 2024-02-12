@@ -18,13 +18,18 @@
 <button onclick="guess()" id="guessBtn">GUESS</button>
 </div>
 </div>
-<div class="winModal" id="winModal">
+<div class="modal" id="winModal">
   <h1 style="margin-bottom:0;">Victory!</h1>
   <h2 style="margin:0;">Come back tommorow!</h2>
-  <h2 style="margin-top:0;">Or try the <a href="genshinDleDaily.html" style="color:white;">Daily version</a>!</h2>
+  <h2 style="margin-top:0;">Or try the <a href="genshinDleRandom.html" style="color:white;">Daily version</a>!</h2>
+  <h3>stats:</h3>
+  <div class="stats">
+    <h3>Total played: <span id="totalGuess">0</span></h3>
+    <h3>Average guesses: <span id="averageGuess">0</span></h3>
+  </div>
   <h2 style="font-size:50%;">click in the blank area to close</h2>
 </div>
-<div id="modalCloseDiv" onclick="document.getElementById('winModal').style.display = 'none';document.getElementById('modalCloseDiv').style.display = 'none'" style="display:none;position:absolute;width:100vw;height:100vh;top:0;left:0;"></div>
+<div id="modalCloseDiv" onclick="document.querySelectorAll('.modal').forEach((modal) => modal.style.display = 'none');document.getElementById('modalCloseDiv').style.display = 'none'" style="display:none;position:absolute;width:100vw;height:100vh;top:0;left:0;"></div>
 <div class="parentDiv">
   <div class="guessBar">
     <span>Character</span>
@@ -118,7 +123,17 @@ function guess(input = document.getElementById("input").value) {
 function wonFunction() {
   document.getElementById("winModal").style.display = "block"
   document.getElementById("modalCloseDiv").style.display = "block"
+  localStorage.setItem("averageInfiniteGuess", ((+localStorage.getItem("averageInfiniteGuess")* +localStorage.getItem("totalInfiniteGuess")+ +alreadyGuessed.length)/ (+localStorage.getItem("totalInfiniteGuess")+1)))
+  localStorage.setItem("totalInfiniteGuess", +localStorage.getItem("totalInfiniteGuess")+1)
+  updateStats()
 }
+
+function updateStats() {
+  document.getElementById("totalGuess").innerHTML = localStorage.getItem("totalInfiniteGuess")
+  document.getElementById("averageGuess").innerHTML = Math.floor(+localStorage.getItem("averageInfiniteGuess")*10)/10
+  document.getElementById("streak").innerHTML = localStorage.getItem("dailyStreak")
+}
+
 
 $(document).ready(function() {
 

@@ -2,7 +2,7 @@ body {
   background-color: rgb(6, 11, 24);
 }
 
-.winModal {
+.modal {
   position:fixed;
   top:50%;left:50%;
   transform:translate(-50%,-50%);
@@ -15,10 +15,14 @@ body {
   animation:flyIn 500ms ease-out;
 }
 
-.winModal h1, .winModal h2 {
+.modal h1, .modal h2, .modal h3 {
   text-align:center;
   color:white;
   font-family:verdana;
+}
+
+.stats * {
+  margin:0;
 }
 
 #input {
