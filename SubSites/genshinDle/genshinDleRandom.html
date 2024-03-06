@@ -88,7 +88,7 @@ document.getElementById("input").onkeydown = function(e) {
     try {
       guess()
     } catch (TypeError) {
-      guess(document.querySelector("button").innerHTML)
+      guess(document.querySelector(".suggestion").innerHTML)
     }
   }
 }
