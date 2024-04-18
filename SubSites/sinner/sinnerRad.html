@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  h1 {
+    margin:0;
+  }
+
+  * {
+    font-family:helvetica;
+  }
+</style>
+</head>
+<body>
+<h1>radiany</h1>
+<p id="degrees">
+  <span id="operation">sin </span>
+  <input id="inputRadians" value="1/2" type="text"><span>π</span>
+  <span> = </span>
+  <span id="operationOut">+sin </span>
+  <span id="outputRadians">1/2</span><span>π</span>
+</p>
+<p id="actualOutput"></p>
+<button onclick="currentOp = 'sin'">sin</button>
+<button onclick="currentOp = 'cos'">cos</button>
+<br>
+<br>
+<a href="sinnerDg.html">stupne</a>
+<script>
+  let currentOp = "sin"
+  document.querySelectorAll("input").forEach((element) => element.addEventListener("input", mainFunc))
+  document.querySelectorAll("button").forEach((element) => element.addEventListener("click", mainFunc))
+
+
+  function mainFunc() {
+    radians = document.querySelector("#inputRadians").value
+    document.querySelector("#operation").innerHTML = `${currentOp} `
+    radianRatio = radians.split("/")
+    radianRatio[0] = +radianRatio[0] % (+radianRatio[1]*2)
+    quadrant = Math.floor(eval(radianRatio.join("/"))*2)
+    if (currentOp == "sin") {document.querySelector("#operationOut").innerHTML = `${["+","+","-","-"][quadrant]}${currentOp} `}
+    if (currentOp == "cos") {document.querySelector("#operationOut").innerHTML = `${["+","-","-","+"][quadrant]}${currentOp} `}
+    output = document.querySelector("#outputRadians")
+    switch (quadrant) {
+      case 0:
+        output.innerHTML = radianRatio.join("/")
+        break
+      case 1:
+        radianRatio[0] = (+radianRatio[1]) - (+radianRatio[0])
+        output.innerHTML = radianRatio.join("/")
+        break
+      case 2:
+        radianRatio[0] = (+radianRatio[0]) - (+radianRatio[1])
+        output.innerHTML = radianRatio.join("/")
+        break
+      case 3:
+        radianRatio[0] = (+radianRatio[1] * 2) - (+radianRatio[0])
+        output.innerHTML = radianRatio.join("/")
+        break
+    }
+    if (currentOp == "sin") {document.querySelector("#actualOutput").innerHTML = `= ${["+","+","-","-"][quadrant]}${Math.sin(eval(output.innerHTML)*Math.PI)}`}
+    if (currentOp == "cos") {document.querySelector("#actualOutput").innerHTML = `= ${["+","-","-","+"][quadrant]}${Math.cos(eval(output.innerHTML)*Math.PI)}`}
+  }
+</script>
+</body>
+</html>

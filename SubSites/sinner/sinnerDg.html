@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  h1 {
+    margin:0;
+  }
+
+  * {
+    font-family:helvetica;
+  }
+</style>
+</head>
+<body>
+<h1>stupně</h1>
+<p id="degrees">
+  <span id="operation">sin </span>
+  <input id="inputAngle" value="0" type="text">
+  <span> = </span>
+  <span id="operationOut">+sin </span>
+  <span id="outputAngle">0</span>
+</p>
+<p id="actualOutput"></p>
+<button onclick="currentOp = 'sin'">sin</button>
+<button onclick="currentOp = 'cos'">cos</button>
+<br>
+<br>
+<a href="sinnerRad.html">radiany</a>
+<script>
+  let currentOp = "sin"
+  let input = document.querySelector("#inputAngle")
+  document.querySelectorAll("input").forEach((element) => element.addEventListener("input", mainFunc))
+  document.querySelectorAll("button").forEach((element) => element.addEventListener("click", mainFunc))
+
+
+  function mainFunc() {
+    angle = +input.value % 360
+    document.querySelector("#operation").innerHTML = `${currentOp} `
+    quadrant = Math.floor(angle / 90)
+    if (currentOp == "sin") {document.querySelector("#operationOut").innerHTML = `${["+","+","-","-"][quadrant]}${currentOp} `}
+    if (currentOp == "cos") {document.querySelector("#operationOut").innerHTML = `${["+","-","-","+"][quadrant]}${currentOp} `}
+    output = document.querySelector("#outputAngle")
+    switch (quadrant) {
+      case 0:
+        output.innerHTML = angle
+        break
+      case 1:
+        output.innerHTML = 180 - angle
+        break
+      case 2:
+        output.innerHTML = angle - 180
+        break
+      case 3:
+        output.innerHTML = 360 - angle
+        break
+    }
+    if (currentOp == "sin") {document.querySelector("#actualOutput").innerHTML = `= ${["+","+","-","-"][quadrant]}${Math.sin((eval(output.innerHTML)*Math.PI)/180)}`}
+    if (currentOp == "cos") {document.querySelector("#actualOutput").innerHTML = `= ${["+","-","-","+"][quadrant]}${Math.cos((eval(output.innerHTML)*Math.PI)/180)}`}
+  }
+</script>
+</body>
+</html>
