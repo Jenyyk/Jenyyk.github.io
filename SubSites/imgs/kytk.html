@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="cs" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+  body {
+    overflow:hidden;
+    background-color:#3b3b3b;
+  }
+
+  h1 {
+    font-size:5em;
+    width:100vw;
+    margin:0;
+    left:50%;
+    text-align:center;
+    transform:translateX(-50%);
+    z-index:3;
+    position:absolute;
+    color:pink;
+    font-family:verdana;
+  }
+
+  #img {
+    animation:slideIn 2s ease-out;
+    top:200px;
+    position:absolute;
+    height:calc(100vh - 400px);
+    left:50%;
+    animation-fill-mode:forwards;
+  }
+
+  @keyframes slideIn {
+    from {transform:translate(-50%, 200%);}
+    to {transform:translate(-50%, 0%);}
+  }
+</style>
+</head>
+<body>
+<h1>Miluju tě nigga</h1>
+<img id="img">
+<script>
+  let counter = 0
+  function switchImg() {
+    document.getElementById("img").src = `img${(counter % 11)+1}.png`
+    counter++
+  }
+  setInterval(switchImg, 240)
+</script>
+</body>
+</html>
