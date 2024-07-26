@@ -1,0 +1,97 @@
+<<!DOCTYPE html>
+<html lang="cs" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title>camera effect</title>
+<style>
+  button {
+    position:absolute;
+    right:0;
+    z-index:2;
+  }
+  body {
+    background-color:gray;
+    overflow:hidden;
+  }
+  #effectParent {
+    margin:0;
+    width:100vw;
+    height:100vh;
+    position:absolute;
+    top:0;
+  }
+  .row {
+    display:flex;
+  }
+  .letter {
+    color:black
+    font-family:verdana;
+    font-weight:bold;
+    font-size:1.6vh;
+  }
+</style>
+</head>
+<body>
+<div id="effectParent"></div>
+<video autoplay muted style="opacity:0;"></video>
+<canvas width="640" height="480" style="opacity:0;"></canvas>
+<button onclick="mode = 'lum'">LUM</button>
+<button onclick="mode = 'RGB'" style="top:50px;">RGB</button>
+<script>
+  const video = document.querySelector("video")
+  const canvas = document.querySelector("canvas")
+  const context = canvas.getContext("2d")
+
+  let mode = "rgb"
+  let totalRows = 0
+
+  parent = document.getElementById("effectParent")
+  for (let i = 0; i < 45; i++) {
+    row = document.createElement("div")
+    totalRows++
+    row.setAttribute("class", "row")
+    for (let j = 0; j < 150; j++) {
+      letter = document.createElement("span")
+      letter.setAttribute("class","letter")
+      letter.innerHTML = "0"
+      row.appendChild(letter)
+    }
+    parent.appendChild(row)
+  }
+
+  navigator.mediaDevices.getUserMedia({video:true})
+  .then((stream) => {
+    video.srcObject = stream
+  })
+  video.addEventListener("play", () => {
+    const drawFrame = () => {
+      if (video.paused || video.ended) {return}
+      context.drawImage(video, 0, 0, canvas.width, canvas.height)
+      let canvWidth = canvas.width
+      let canvHeight = canvas.height
+      let currRow = 1
+      document.querySelectorAll(".row").forEach((row) => {
+        height = Math.floor(currRow*(canvas.height/totalRows))
+        let imageData = context.getImageData(0, height, canvas.width, height+1).data
+        var rowValues = []
+        for (let i = 0; i < canvas.width*4; i+=4) {
+          lum = (0.299 * +imageData[i]) + (0.7152 * +imageData[i+1]) + (0.0722 * +imageData[i+2])
+          toPush = (mode == "lum") ? `rgb(${lum},${lum},${lum})` : `rgb(${imageData[i]},${imageData[i+1]},${imageData[i+2]})`
+          rowValues.push(toPush)
+        }
+        pixels = rowValues.length
+        blur = Math.floor(pixels / row.childElementCount)
+        for (let i = 0; i < row.childElementCount; i++) {
+          color = rowValues[i*blur]
+          row.childNodes[i].style.color = color
+          row.childNodes[i].innerHTML = Math.round(Math.random())
+        }
+        currRow++
+      })
+      requestAnimationFrame(drawFrame)
+    }
+    drawFrame()
+  })
+</script>
+</body>
+</html>
