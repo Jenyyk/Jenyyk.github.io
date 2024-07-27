@@ -19,13 +19,14 @@
     height:100vh;
     position:absolute;
     top:0;
+    text-align:center;
   }
   .row {
     display:flex;
   }
   .letter {
-    color:black
-    font-family:verdana;
+    color:black;
+    font-family:monospace;
     font-weight:bold;
     font-size:1.6vh;
   }
@@ -35,18 +36,22 @@
 <div id="effectParent"></div>
 <video autoplay muted style="opacity:0;"></video>
 <canvas width="640" height="480" style="opacity:0;"></canvas>
-<button onclick="mode = 'lum'">LUM</button>
-<button onclick="mode = 'RGB'" style="top:50px;">RGB</button>
+<button onclick="colorMode = 'lum'">LUM</button>
+<button onclick="colorMode = 'RGB'" style="top:50px;">RGB</button>
+<button onclick="textMode = 'num'" style="top:100px">NUM</button>
+<button onclick="textMode = 'text'" style="top:150px;">TXT</button>
 <script>
   const video = document.querySelector("video")
   const canvas = document.querySelector("canvas")
-  const context = canvas.getContext("2d")
+  const context = canvas.getContext("2d", {willReadFrequently:true})
 
-  let mode = "rgb"
+  let colorMode = "rgb"
+  let textMode = "text"
   let totalRows = 0
+  let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M','N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
   parent = document.getElementById("effectParent")
-  for (let i = 0; i < 45; i++) {
+  for (let i = 0; i < 50; i++) {
     row = document.createElement("div")
     totalRows++
     row.setAttribute("class", "row")
@@ -69,14 +74,15 @@
       context.drawImage(video, 0, 0, canvas.width, canvas.height)
       let canvWidth = canvas.width
       let canvHeight = canvas.height
-      let currRow = 1
+      let currRow = 0
+      let doChange = Math.random()
       document.querySelectorAll(".row").forEach((row) => {
         height = Math.floor(currRow*(canvas.height/totalRows))
         let imageData = context.getImageData(0, height, canvas.width, height+1).data
         var rowValues = []
         for (let i = 0; i < canvas.width*4; i+=4) {
           lum = (0.299 * +imageData[i]) + (0.7152 * +imageData[i+1]) + (0.0722 * +imageData[i+2])
-          toPush = (mode == "lum") ? `rgb(${lum},${lum},${lum})` : `rgb(${imageData[i]},${imageData[i+1]},${imageData[i+2]})`
+          toPush = (colorMode == "lum") ? `rgb(${lum},${lum},${lum})` : `rgb(${imageData[i]},${imageData[i+1]},${imageData[i+2]})`
           rowValues.push(toPush)
         }
         pixels = rowValues.length
@@ -84,7 +90,8 @@
         for (let i = 0; i < row.childElementCount; i++) {
           color = rowValues[i*blur]
           row.childNodes[i].style.color = color
-          row.childNodes[i].innerHTML = Math.round(Math.random())
+          toChangeTo = (textMode == "num") ? Math.round(Math.random()*9) : letters[Math.floor(Math.random()*letters.length)]
+          if (doChange > 0.8) {row.childNodes[i].innerHTML = toChangeTo}
         }
         currRow++
       })
