@@ -1,342 +1,48 @@
 <!DOCTYPE html>
-<html lang="cs" dir="ltr">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="utf-8">
-  <link href="assets/favicon.ico" rel="icon">
-  <title>Effect gallery</title>
-  <style>
-    body {
-      margin:0;
-      background-color:rgb(6, 6, 20)
-    }
-
-    .wrapper {
-      height:65vh;
-      width:65vh;
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform:translate(-50%, -50%);
-      border:1px solid rgb(150, 150, 150);
-
-    }
-
-    .embed {
-      word-wrap: break-word;
-      white-space: -moz-pre-wrap;
-      white-space: pre-wrap;
-      height:62vh;
-      width:62vh;
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform:translate(-50%, -50%);
-      overflow:hidden;
-      border-radius:60px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    #text {
-      font-family:verdana;
-      font-size:2.3vh;
-      position:absolute;
-      width:103%;
-      left:-2%;
-      top:-4%;
-      color:rgb(100, 200, 200);
-      opacity:0;
-      transition:all 600ms;
-      cursor:pointer;
-      text-decoration:none;
-    }
-
-    #text:hover{
-      opacity:1;
-      transition:all 400ms;
-    }
-
-
-    #logo {
-      z-index:3;
-      width:60%;
-      image-rendering:pixelated;
-      pointer-events:none;
-    }
-
-    .switchEmbed {
-      position:absolute;
-      left:50%;
-      transform:translateX(-50%);
-      top:82vh;
-      width:90vw;
-    }
-
-    p {
-      color:white;
-      font-family:verdana;
-      font-size:6vw;
-      text-align:center;
-      margin:0;
-    }
-
-    #switcher {
-      color:rgb(100, 200, 200);
-      font-family:verdana;
-      font-size:6vw;
-    }
-
-    #blinker {
-      color:rgb(100, 200, 200);
-      font-family:verdana;
-      font-size:6vw;
-      position:relative;
-      left:-2%;
-      animation:blinking 1200ms infinite;
-    }
-
-    ::-webkit-scrollbar {
-    width: .7vw;
-    padding:20px;
-    }
-
-    ::-webkit-scrollbar-track {
-    border:solid 1px white;
-    border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 5px white;
-    border-radius: 10px;
-    width:80%;
-    }
-
-    @media (max-width:1200px) {
-      #text {
-        opacity:1;
-      }
-    }
-
-    @keyframes blinking {
-      from {
-        opacity:1;
-      }
-      1% {
-        opacity:0;
-      }
-      40% {
-        opacity:0;
-      }
-      41% {
-        opacity:1;
-      }
-      to {
-        opacity:1;
-      }
-    }
-
-    #contentGrid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:10px;
-    }
-
-    .contentWrapper {
-      width:calc(100% - 20);
-      position:relative;
-      left:50%;
-      transform:translateX(-50%);
-      border: 1px solid rgb(150, 150, 150);
-      border-radius:30px;
-      padding:20px;
-    }
-
-    .contentWrapper * {
-      margin:5px;
-    }
-
-    .contentHeading {
-      color:white;
-      margin:0;
-      font-family:"rubik",sans-serif;
-      font-weight:normal;
-    }
-
-    .contentDesc {
-      color:white;
-      font-size:100%;
-      text-align:left;
-    }
-
-    a {
-      text-decoration:none;
-    }
-
-    #backgroundText {
-      word-wrap:break-word;
-      font-family:"rubik",sans-serif;
-      color:cyan;
-      position:fixed;
-      top:0;
-      left:-20px;
-      z-index:0;
-      pointer-events:none;
-      opacity:0.01;
-      width:120vw;
-    }
-
-    #backgroundWrapper {
-      position:relative;
-      width:99vw;
-      height:99vh;
-    }
-
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jan Křivský Portfolio</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-<body onload="loadFnc()">
-
-<div id="backgroundWrapper">
-<p id="backgroundText">test</p>
-</div>
-
-<div class="wrapper">
-<div class="embed">
-<span href="" id="text"></span>
-<img id="logo" src="assets/logo.png">
-</div>
-</div>
-
-<div class="switchEmbed">
-<p>Strive to be
-<span id="switcher">PERPLEXED</span>
-<span id="blinker">|</span></p>
-</div>
-
-
-
-
-<div id="contentGrid">
-  <a href="SubSites/piCheckr.html">
-  <div class="contentWrapper">
-  <h1 class="contentHeading">πCheckr</h1>
-  <p class="contentDesc">Input all the digits of pi you know and have the site check them for corectness in real time!</p>
-  </div>
-  </a>
-
-  <a href="SubSites/conway.html">
-  <div class="contentWrapper">
-  <h1 class="contentHeading">Conway's Game of Life</h1>
-  <p class="contentDesc">The classic game of life, with a cusomizable table size and all the classic rules!</p>
-  </div>
-  </a>
-
-  <a href="SubSites/spin.html">
-  <div class="contentWrapper">
-  <h1 class="contentHeading">Spin your sentence in a circle!</h1>
-  <p class="contentDesc">Not much to say about it, does excatly as advertised with a lot of customisations to play with.</p>
-  </div>
-  </a>
-
-  <a href="SubSites/physics/setrvacnost.html">
-  <div class="contentWrapper">
-  <h1 class="contentHeading">Actual Basketball simulation</h1>
-  <p class="contentDesc">You are given a basketball with accurate physics. Click to attract basketball to your cursor! I dont recommend starting gravity multiple times.</p>
-  </div>
-  </a>
-
-  <a href="SubSites/genshinDle/genshinDleDaily.html">
-  <div class="contentWrapper">
-  <h1 class="contentHeading">GenshinDle!</h1>
-  <p class="contentDesc">Guess genshin impact characters based on a few attributes! Plays just like the classic wordle game.</p>
-  </div>
-  </a>
-
-  <a href="SubSites/cameraEncoder.html">
-  <div class="contentWrapper">
-  <h1 class="contentHeading">Camera Encoder</h1>
-  <p class="contentDesc">Transform your webcam input LIVE into ones and zeros with a cool in-browser effect!</p>
-  </div>
-  </a>
-
-  <a href="SubSites/ligmaBallsWeb/baller.html">
-  <div class="contentWrapper">
-  <h1 class="contentHeading">Its so sad that Steve Jobs died of Ligma</h1>
-  <p class="contentDesc">Who the hell is Steve Jobs?</p>
-  </div>
-  </a>
-
-  <a href="SubSites/malovani.html">
-  <div class="contentWrapper">
-  <h1 class="contentHeading">Barebones paint</h1>
-  <p class="contentDesc">Its literally just that</p>
-  </div>
-  </a>
-</div>
-
-<script>
-let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-let messages = ["PERPLEXED","MYSTIFIED","INTRIGUED","INQUIRING","DETERMINED","REMARKABLE","ENTRACING"]
-let last = "PERPLEXED"
-let slowOffset = 0
-
-function loadFnc() {
-  window.addEventListener('mousemove', genText)
-  widthInterval = setInterval(genText, 10)
-  removeLetter()
-  backgroundText = ""
-  for (let i = 0; i < 5000; i++) {
-    charSet = chars.split("")
-    backgroundText += charSet[Math.floor(Math.random()*charSet.length)]
-    document.getElementById("backgroundText").innerHTML = backgroundText
-  }
-  setInterval(backgroundMoveFnc, 10)
-}
-
-function genText() {
-  array = ""
-  let i = 0
-  while (i < 2000) {
-    charSet = chars.split("")
-    array += charSet[Math.floor(Math.random()*charSet.length)]
-    i++
-  }
-  document.getElementById("text").innerHTML = array
-  if (window.innerWidth > 1200) {
-    clearInterval(widthInterval)
-  }
-}
-
-function removeLetter() {
-  switcher = document.getElementById("switcher")
-  if (switcher.innerHTML.length == 0) {
-    newText = messages[Math.floor(Math.random() * messages.length)]
-    while (newText == last) {
-      newText = messages[Math.floor(Math.random() * messages.length)]
-    }
-    i = 0
-    addLetter()
-  } else {
-    switcher.innerHTML = switcher.innerHTML.slice(0, -1)
-    setTimeout(removeLetter, 50)
-  }
-}
-
-function addLetter() {
-  if (i == newText.length) {
-    last = switcher.innerHTML
-    setTimeout(removeLetter, 1500)
-  } else {
-    switcher.innerHTML += newText.charAt(i)
-    i++
-    setTimeout(addLetter, 50)
-  }
-}
-
-async function backgroundMoveFnc() {
-  document.getElementById("backgroundText").style.top = -(document.documentElement.scrollTop / 4) + slowOffset +"px"
-  slowOffset -= 0.2
-}
-</script>
+<body>
+  <lander class="lander">
+    <h1 id="landerHeader">Jan Krivsky</h1>
+    <div id="landerDecor">
+      <img id="landerImg" src="assets/tech.jpg">
+    </div>
+  </lander>
+  <main class="main">
+    <sidebar class="sidebar">
+      <img src="assets/logo.png" id="selfie">
+      <contacts>
+        <p class="contactMethod" id="discord"><img src="assets/discord.png">Discord</p>
+        <a href="https://github.com/Jenyyk" class="contactMethod"><img src="assets/github.png">Github</a>
+        <a href="https://www.linkedin.com/in/jan-k%C5%99ivsk%C3%BD-14006a32a/" class="contactMethod"><img src="assets/linkedIn.png">LinkedIn</a>
+      </contacts>
+    </sidebar>
+    <content>
+      <div id="topbar">
+      </div>
+      <div id="about">
+        <h1>About me</h1>
+        <p>Hi, my name is Jan Křivský, I am currently a student at <a href="https://www.gypce.cz/" target="_blank" style="word-wrap: break-word;">Gymnázium Pardubice Dašická</a>, and i love programming. <br> My favourite part is learning new things and exploring all possibilities a language can offer.</p>
+      </div>
+      <div id="skills">
+        <h1>Professional Skills</h1>
+        <p>I love exploring many different programming languages and i consider myself proficient in many of them, including:</p>
+        <div style="display:flex; flex-wrap: wrap; border:none; border-radius: 0px; justify-content:space-evenly; padding: 20px 0px 0 0px;">
+          <div class="languageSkill" id="htmlcss">HTML / CSS</div>
+          <div class="languageSkill" id="javascript">JavaScript</div>
+          <div class="languageSkill" id="python">Python</div>
+          <div class="languageSkill" id="rust">Rust</div>
+          <div class="languageSkill" id="git">GIT</div>
+          <div class="languageSkill" id="java">Java</div>
+        </div>
+      </div>
+    </content>
+  </main>
+  <script src="script.js"></script>
 </body>
 </html>
