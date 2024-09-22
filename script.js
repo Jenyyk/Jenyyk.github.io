@@ -10,7 +10,6 @@ function discordReplaceText(string) {
   text = discord.innerHTML.split(">")
   text[1] = string
   text = text.join(">")
-  console.log(text)
   discord.innerHTML = text
 }
 
