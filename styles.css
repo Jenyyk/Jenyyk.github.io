@@ -1,5 +1,5 @@
-@font-face { font-family: aileron; src: url("assets/Aileron.otf"); }
-@font-face { font-family: inter; src: url("assets/Inter.ttc")}
+@font-face { font-family: aileron; src: url("assets/Aileron.otf") format("opentype"); }
+@font-face { font-family: inter; src: url("assets/Inter.ttf") format("truetype");}
 
 /* * {
   border: solid 1px red;
@@ -22,68 +22,29 @@ body {
   background-color: #000000;
 }
 
-.lander {
-  height: 100vh;
-  width: 100%;
-  background-color: #fdf7fa;
-  margin: 0;
-
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-around;
-
-  overflow: hidden;
+.Collider {
+  perspective: 800px;
+  display: inline-block;
+}
+.Collider div {
+  transition: 200ms ease-out;
+  display: inline-block;
 }
 
 #landerHeader {
   font-size: 8rem;
   font-family: aileron;
   text-align: center;
-  color: #0d1821;
+
+  color: #fdf7fa;
+  background: linear-gradient(30deg, #006CCF, #fdf7fa 60%);
+  color: transparent;
+  background-clip: text;
 
   display: inline;
-  position: relative;
-  margin: 0;
-}
+  pointer-events: none;
 
-#landerDecor {
-  width: 36%;
-  min-width:250px;
-  aspect-ratio: 1;
-  border: 5px solid #0d1821;
-  border-radius: 50px;
-  transform: rotate(-12deg);
-  padding: 0;
-}
-
-.decorOffset {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: calc(0% - 5px);
-  left: calc(0% - 5px);
-  z-index: -1;
-
-  border: 5px solid #0d1821;
-  border-radius: 50px;
-
-  animation: fadeShrink 2000ms ease-in;
-  animation-fill-mode: forwards;
-}
-@keyframes fadeShrink {
-  from { transform: scale(1); opacity: 1; }
-  to   { transform: scale(0.7) rotate(-10deg); opacity: 0.2; }
-}
-
-#landerImg {
-  height: 100%;
-  aspect-ratio: 1;
-  transform: rotate(12deg);
-  object-fit: cover;
-  border: 5px solid #7F9C96;
-  border-radius: 50px;
-  padding: 10px;
+  transform:rotate3d(1, 0, 0, 10deg);
 }
 
 .main {
@@ -181,7 +142,7 @@ content {
   padding: 10px;
   box-sizing: border-box;
 }
-content div {
+content div:not( .ignoreContentHolder ) {
   background: linear-gradient(black, black), radial-gradient( ellipse 60% 200% at 50% 100%, #006CCF, #7F9C96 );
   background-clip: padding-box, border-box;
   background-origin: border-box;
@@ -203,7 +164,7 @@ content div * {
   margin: 0;
 }
 
-.languageSkill {
+content div.languageSkill {
   display: inline-block;
   margin: 5px;
   min-width: 50px;
