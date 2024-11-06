@@ -56,27 +56,20 @@ body {
   align-content: start;
 
   background-color:transparent;
-  background-color: #000000;
+  background-color: #111111;
   background: radial-gradient( ellipse 100% 120% at 10% 10%, #006CCF40 2%, transparent 25% ),
               radial-gradient( ellipse 100% 120% at 20% 20%, #7F9C9640 0, transparent 12% ),
               radial-gradient( ellipse 100% 120% at 10% 110%, #006CCF40 2%, transparent 25% ),
-              #000000;
+              #111111;
   background-size: 100vw 200vh;
   background-repeat: repeat;
 
   height: 2000px;
 }
-.main::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: url("assets/backgroundPattern.png");
-  background-position: -18px -17px;
-}
 
 .sidebar {
-  position: relative;
+  position: sticky;
+  top:0;
   min-width: 300px;
   width: 20%;
   height: max-content;
@@ -113,14 +106,14 @@ contacts {
   gap: 15px;
   height: 3em;
   min-height: 32px;
-  margin: 6px 0;
+  margin: 10px 0;
   backdrop-filter: blur(3px);
 
-  border: 5px solid #006CCF;
+  border: 3px solid #27272a;
   border-radius: 20px;
   padding: 4px;
   background: linear-gradient(
-      30deg, #006CCF 50%, transparent 50%
+      30deg, #00000040 50%, transparent 50%
     );
   background-size: 300%;
   background-position: 100%;
@@ -143,7 +136,7 @@ content {
   box-sizing: border-box;
 }
 content div:not( .ignoreContentHolder ) {
-  background: linear-gradient(black, black), radial-gradient( ellipse 60% 200% at 50% 100%, #006CCF, #7F9C96 );
+  background: linear-gradient(black,black), radial-gradient( ellipse 60% 200% at 50% 100%, #006CCF, #7F9C96 );
   background-clip: padding-box, border-box;
   background-origin: border-box;
   padding: 30px 20px;
@@ -162,6 +155,13 @@ content div * {
   border: none; border-radius: 0px;
   background:none;
   margin: 0;
+}
+
+div.location {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 content div.languageSkill {
