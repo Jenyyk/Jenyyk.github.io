@@ -9,7 +9,7 @@ html {
   font-size: min(130%, 3vw);
 }
 
-h1, p, a {
+h1, h2, p, a {
   color: #fdf7fa;
   font-family: Inter;
   line-height: 120%;
@@ -83,6 +83,7 @@ body {
   .sidebar {
     flex-direction: row;
     justify-content: space-evenly;
+    position: relative;
   }
 }
 
@@ -135,20 +136,6 @@ content {
   padding: 10px;
   box-sizing: border-box;
 }
-content div:not( .ignoreContentHolder ) {
-  background: linear-gradient(black,black), radial-gradient( ellipse 60% 200% at 50% 100%, #006CCF, #7F9C96 );
-  background-clip: padding-box, border-box;
-  background-origin: border-box;
-  padding: 30px 20px;
-  border: 5px solid transparent;
-  border-radius: 20px;
-  margin-bottom: 80px;
-
-  backdrop-filter: blur(2px);
-}
-content div * {
-  margin: 0;
-}
 
 #topbar {
   display: flex;
@@ -160,46 +147,42 @@ content div * {
 div.location {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0px;
   margin-bottom: 20px;
 }
+div.location p {
+  font-size: 1.1rem;
+}
 
-content div.languageSkill {
+.techSubHeader {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.techStack {
+  position: relative;
+  left: 30px;
+}
+.techStack p {
   display: inline-block;
-  margin: 5px;
-  min-width: 50px;
-  width: 15%;
+  font-size: 0.8rem;
+
+  border: none;
+  border-radius: 20px;
+  padding: 10px 12px;
+  margin: 15px 8px;
+  min-width: 70px;
+
   text-align: center;
-  border-radius: 5px;
-  border: 1px solid transparent;
-  padding: 4% 0;
-
-  color: white;
-  font-family: Inter;
-  font-size: min(1em, 3vw);
-  word-wrap: break-word;
 }
-.languageSkill::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  filter: grayscale(100%);
-  transition: all 500ms;
-  opacity:0.4;
-
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index:-1;
+.language {
+  background-color: #542121;
+  color: #ef4444;
 }
-.languageSkill:hover::before {
-  filter: grayscale(0%);
-  background-size: 110%;
+.framework {
+  background-color: #1e3356;
+  color: #3b82f6;
 }
-#htmlcss::before { background-image:url("assets/html5-css3.png"); }
-#javascript::before { background-image:url("assets/JavaScript-logo.png"); background-position: center 70%; }
-#python::before { background-image:url("assets/Python-logo.png"); }
-#rust::before { background-image:url("assets/rustacean-logo.png"); }
-#git::before { background-image:url("assets/Git_icon.png"); }
-#java::before { background-image:url("assets/Java_logo.png"); }
+.practice {
+  background-color: #164728;
+  color: #22bc42;
+}
