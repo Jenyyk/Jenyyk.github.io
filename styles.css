@@ -96,7 +96,7 @@ body {
 }
 
 contacts {
-  width: 80%;
+  width: 70%;
   display: block;
 }
 
@@ -105,7 +105,7 @@ contacts {
   justify-content: center;
   align-items: center;
   gap: 15px;
-  height: 3em;
+  height: 2.6em;
   min-height: 32px;
   margin: 10px 0;
   backdrop-filter: blur(3px);
@@ -114,7 +114,7 @@ contacts {
   border-radius: 20px;
   padding: 4px;
   background: linear-gradient(
-      30deg, #00000040 50%, transparent 50%
+      30deg, #00000050 50%, #00000020 50%
     );
   background-size: 300%;
   background-position: 100%;
@@ -181,6 +181,13 @@ div.location p {
   min-width: 70px;
 
   text-align: center;
+  vertical-align: middle;
+}
+.language svg, .framework svg, .practice svg {
+  position: relative;
+  height: 1rem;
+  vertical-align: text-top;
+  margin: 0 10px 0 0;
 }
 .language {
   background-color: #542121;
