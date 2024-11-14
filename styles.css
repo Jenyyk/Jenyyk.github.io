@@ -207,7 +207,7 @@ div.location p {
   flex-direction: column;
   align-items: center;
   width: 32%;
-  height: 40%;
+  height: 45%;
 }
 .job {
   display: flex;
@@ -219,8 +219,8 @@ div.location p {
   border: 1px solid #fdf7fa;
   border-radius: 15px;
   padding: 12px;
-  box-shadow: inset 0 0 20px #fdf7fa60;
-  transition: box-shadow 200ms ease-out;
+  box-shadow: inset 0 0 20px #fdf7fa70;
+  transition: box-shadow 250ms ease-out;
 }
 .job:hover {
   box-shadow: inset 0 0 40px #fdf7fa80;
@@ -231,6 +231,14 @@ div.location p {
 .job p {
   font-size: 0.8em;
 }
-.job img {
+.job img, svg {
   max-width: 20%;
+}
+.workLangParent {
+  display: block;
+  margin: 0;
+}
+#logiscool {
+  background: linear-gradient(180deg, #00000099 30%, #000000 70%), url("assets/logiscoolBanner.jpg") no-repeat center;
+  background-size: cover;
 }
