@@ -9,7 +9,7 @@ html {
   font-size: min(130%, 3vw);
 }
 
-h1, h2, p, a {
+h1, h2, h3, h4, p, a {
   color: #fdf7fa;
   font-family: Inter;
   line-height: 120%;
@@ -200,4 +200,37 @@ div.location p {
 .practice {
   background-color: #164728;
   color: #22bc42;
+}
+
+.jobParent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 32%;
+  height: 40%;
+}
+.job {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  width: 90%;
+  height: 100%;
+
+  border: 1px solid #fdf7fa;
+  border-radius: 15px;
+  padding: 12px;
+  box-shadow: inset 0 0 20px #fdf7fa60;
+  transition: box-shadow 200ms ease-out;
+}
+.job:hover {
+  box-shadow: inset 0 0 40px #fdf7fa80;
+}
+.job * {
+  margin: 8px 0;
+}
+.job p {
+  font-size: 0.8em;
+}
+.job img {
+  max-width: 20%;
 }

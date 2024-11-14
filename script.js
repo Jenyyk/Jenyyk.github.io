@@ -1,8 +1,13 @@
 document.querySelectorAll(".ColliderScName").forEach((collider) => collider.addEventListener("mousemove", function(e) {
   rotateEffect(e, collider.children[0], 30)
-  
 }))
 document.querySelectorAll(".ColliderScName").forEach((collider) => collider.addEventListener("mouseleave", function() {
+  collider.children[0].style.transform = `rotate3d(0, 0, 0, 0deg)`
+}))
+document.querySelectorAll(".ColliderJob").forEach((collider) => collider.addEventListener("mousemove", function(e) {
+  rotateEffect(e, collider.children[0], 30)
+}))
+document.querySelectorAll(".ColliderJob").forEach((collider) => collider.addEventListener("mouseleave", function() {
   collider.children[0].style.transform = `rotate3d(0, 0, 0, 0deg)`
 }))
 
