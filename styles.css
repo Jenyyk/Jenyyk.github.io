@@ -1,0 +1,288 @@
+@font-face { font-family: aileron; src: url("assets/Aileron.otf") format("opentype"); }
+@font-face { font-family: inter; src: url("assets/Inter.ttf") format("truetype");}
+
+/* * {
+  border: solid 1px red;
+} */
+
+html {
+  font-size: min(130%, 3vw);
+}
+
+h1, h2, h3, h4, p, a {
+  color: #fdf7fa;
+  font-family: Inter;
+  line-height: 120%;
+}
+
+body {
+  margin: 0;
+  /* overflow-x: hidden; */
+
+  background-color: #000000;
+  overflow-x: hidden;
+}
+
+.Collider {
+  perspective: 800px;
+  display: inline-block;
+}
+.Collider div {
+  transition: 200ms ease-out;
+  display: inline-block;
+}
+
+#landerHeader {
+  font-size: 8rem;
+  font-family: aileron;
+  text-align: center;
+
+  color: #fdf7fa;
+  background: linear-gradient(30deg, #006CCF, #fdf7fa 60%);
+  color: transparent;
+  background-clip: text;
+
+  display: inline;
+  pointer-events: none;
+
+  transform:rotate3d(1, 0, 0, 10deg);
+}
+
+.main {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  justify-content: space-evenly;
+  align-content: start;
+
+  background-color:transparent;
+  background-color: #111111;
+  background: radial-gradient( ellipse 100% 120% at 10% 10%, #006CCF40 2%, transparent 25% ),
+              radial-gradient( ellipse 100% 120% at 20% 20%, #7F9C9640 0, transparent 12% ),
+              radial-gradient( ellipse 100% 120% at 10% 110%, #006CCF40 2%, transparent 25% ),
+              #111111;
+  background-size: 100vw 200vh;
+  background-repeat: repeat;
+  height: 3000px;
+}
+
+.sidebar {
+  position: sticky;
+  top:0;
+  min-width: 300px;
+  width: 20%;
+  height: max-content;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 1000px) {
+  .sidebar {
+    flex-direction: row;
+    justify-content: space-evenly;
+    position: relative;
+  }
+}
+
+#selfie {
+  width: 80%;
+  border-radius: 10px;
+  margin:6px;
+
+  image-rendering: pixelated;
+}
+
+contacts {
+  width: 70%;
+  display: block;
+}
+
+.contactMethod {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  height: 2.6em;
+  min-height: 32px;
+  margin: 10px 0;
+  backdrop-filter: blur(3px);
+
+  border: 3px solid #27272a;
+  border-radius: 20px;
+  padding: 4px;
+  background: linear-gradient(
+      30deg, #00000050 50%, #00000020 50%
+    );
+  background-size: 300%;
+  background-position: 100%;
+  transition: background-position 700ms ease-out, opacity 300ms ease-out;
+}
+.contactMethod:hover {
+  background-position: 0%;
+}
+.sidebar:has(.contactMethod:hover) .contactMethod:not(:hover) {
+  opacity: 0.6;
+}
+
+contacts img {
+  max-height: 80%;
+  max-width: 2em;
+  margin: 0;
+}
+
+content {
+  /* min-width: 400px; */
+  width: 75%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#topbar {
+  display: flex;
+  border: none; border-radius: 0px;
+  background:none;
+  margin: 0;
+}
+
+div.location {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  margin-bottom: 20px;
+}
+div.location p {
+  font-size: 1.1rem;
+}
+
+.mainHeader {
+  margin: 80px 0 10px 0;
+  font-size: 1.8rem;
+}
+
+.techSubHeader {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.techStack {
+  position: relative;
+  left: 30px;
+}
+.language, .framework, .practice {
+  display: inline-block;
+  font-size: 0.8rem;
+
+  border: none;
+  border-radius: 20px;
+  padding: 10px 12px;
+  margin: 15px 8px;
+  min-width: 70px;
+
+  text-align: center;
+  vertical-align: middle;
+}
+.language svg, .framework svg, .practice svg {
+  position: relative;
+  height: 1rem;
+  vertical-align: text-top;
+  margin: 0 10px 0 0;
+}
+.language {
+  background-color: #542121;
+  color: #ef4444;
+}
+.framework {
+  background-color: #1e3356;
+  color: #3b82f6;
+}
+.practice {
+  background-color: #164728;
+  color: #22bc42;
+}
+
+.scroll {
+  position: relative;
+  left: -8%;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  flex-shrink: 0;
+  max-width: 80vw;
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  border-radius: 12px;
+}
+.scroll::before {
+  content: "";
+  display: inline;
+  min-width: 10%;
+}
+.jobParent, .projectParent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 28%;
+  height: clamp(500px, 40vh, 1200px);
+  margin: 8px;
+  flex-shrink: 0;
+}
+.job, .project {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  width: 90%;
+  height: 100%;
+
+  border: 0px solid #fdf7fa;
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: inset 0 0 20px #3b3b3b;
+  transition: all 500ms ease;
+}
+.job:hover, .project:hover {
+  box-shadow: inset 0 0 50px #3b3b3b;
+}
+.job *, .project * {
+  margin: 8px 0;
+}
+.job p, .project p {
+  font-size: 0.8em;
+}
+.job img, .job svg, .project img, .project svg {
+  max-width: 20%;
+}
+.link img {
+  height: 35px;
+  width: 35px;
+  position: absolute;
+  top: 5px;
+  right: 27px;
+}
+.LangParent {
+  display: block;
+  margin: 0;
+}
+#logiscool {
+  background: linear-gradient(180deg, #00000099 30%, #000000 70%), url("assets/logiscoolBanner.jpg") no-repeat center;
+  background-size: cover;
+}
+#bakalight {
+  background: linear-gradient(180deg, #00000099 30%, #000000 70%), url("assets/bakalightBanner.png") no-repeat center;
+  background-size: cover;
+}
+#lunchbot {
+  background: linear-gradient(180deg, #00000099 30%, #000000 70%), url("assets/lunchbotBanner.png") no-repeat center;
+  background-size: cover;
+}
+#effectGallery {
+  background: linear-gradient(180deg, #00000099 30%, #000000 70%), url("assets/effectGalleryBanner.png") no-repeat center;
+  background-size: cover;
+}
+
+@media (max-width: 1200px) {
+  .jobParent, .projectParent {
+    width: 60vw !important;
+  }
+}
