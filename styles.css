@@ -207,11 +207,13 @@ div.location p {
   left: -8%;
   display: flex;
   flex-direction: row;
-  overflow-x: scroll;
   flex-shrink: 0;
   max-width: 80vw;
   mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
   border-radius: 12px;
+
+  overflow-x: scroll;
+  scrollbar-color: black transparent;
 }
 .scroll::before {
   content: "";
