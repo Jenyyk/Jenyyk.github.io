@@ -64,7 +64,6 @@ body {
               #111111;
   background-size: 100vw 200vh;
   background-repeat: repeat;
-  height: 3000px;
 }
 
 .sidebar {
@@ -139,6 +138,11 @@ content {
   padding: 10px;
   box-sizing: border-box;
 }
+@media (max-width: 1200px) {
+    content {
+        width: 95%;
+    }
+}
 
 #topbar {
   display: flex;
@@ -169,6 +173,7 @@ div.location p {
 .techStack {
   position: relative;
   left: 30px;
+  width: calc(100% - 30px);
 }
 .language, .framework, .practice {
   display: inline-block;
@@ -200,6 +205,14 @@ div.location p {
 .practice {
   background-color: #164728;
   color: #22bc42;
+}
+@media (max-width: 1200px) {
+    .language, .framework, .practice {
+        font-size: 1.3rem !important;
+    }
+    .language svg, .framework svg, .practice svg {
+        height: 1.6rem;
+    }
 }
 
 .scroll {
@@ -264,6 +277,16 @@ div.location p {
   display: block;
   margin: 0;
 }
+@media (max-width: 1200px) {
+    .job p, .project p {
+        font-size: 1em;
+    }
+    .LangParent * {
+        font-size: 1rem !important;
+        height: 1.2rem !important;
+        margin: 1px;
+    }
+}
 #logiscool {
   background: linear-gradient(180deg, #00000099 30%, #000000 70%), url("assets/logiscoolBanner.jpg") no-repeat center;
   background-size: cover;
@@ -284,5 +307,9 @@ div.location p {
 @media (max-width: 1200px) {
   .jobParent, .projectParent {
     width: 60vw !important;
+    height: unset !important;
+  }
+  .job, .project {
+      height: 40vh !important;
   }
 }
