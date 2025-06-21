@@ -230,7 +230,24 @@ div.location p {
   margin: 8px;
   flex-shrink: 0;
 }
+.job:after, .project:after {
+  content: "";
+  position: absolute;
+  top: 60%;
+  opacity: 0.2;
+  left: -1px;
+  height: 80px;
+  width: 2px;
+  background: linear-gradient(transparent, #006CCF, transparent);
+  transition: all 600ms ease;
+}
+.job:hover:after, .project:hover:after {
+  opacity: 1;
+  top: 10%;
+  height: 120px;
+}
 .job, .project {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: end;
