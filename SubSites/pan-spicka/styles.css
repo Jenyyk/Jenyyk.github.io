@@ -1,0 +1,147 @@
+/* Debug lol */
+* {
+    /* border: 1px solid red; */
+}
+@font-face { font-family: inter; src: url("/assets/Inter.ttf") format("truetype");}
+
+:root {
+    --background-color: #202025;
+    --primary-color: #0E6BA8;
+    --secondary-color: #A6E1FA;
+    --tertiary-color: #06304B;
+    color: white;
+    font-family: inter;
+    font-size: 100%;
+}
+p, a, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+a {
+    color: var(--secondary-color);
+}
+
+body {
+    margin: 0;
+    background: #202025;
+    width: 100vw;
+
+    padding-bottom: 140px;
+}
+
+#topBar {
+    position: relative;
+    width: 70%;
+    left: 15%;
+    margin: 20px 0 40px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#topBar h1 {
+    font-weight: normal;
+}
+#topBar h1 img {
+    /* must be negative because vertical-align doesnt accept calc() */
+    --size-boost: -10px;
+    height: calc(1cap + (var(--size-boost) * -2));
+    vertical-align: var(--size-boost);
+    margin-right: 10px;
+    border-radius: 100%;
+}
+.addBotButton {
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    background: linear-gradient(0deg, var(--tertiary-color), var(--primary-color));
+    padding: 20px 18px;
+    border-radius: 50cqmin;
+    transition: all 70ms ease-out;
+}
+.addBotButton:hover { transform: scale(1.05); }
+.addBotButton:active { transform: scale(0.96); }
+
+#bigPointParent {
+    position: relative;
+    width: 70%;
+    left: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 120px;
+}
+.bigPoint {
+    position: relative;
+    box-sizing: border-box;
+    width: 30%;
+    aspect-ratio: 1;
+    padding: 20px;
+    /* gradient border */
+    background: linear-gradient(var(--background-color), var(--background-color)) padding-box,
+                linear-gradient(90deg, var(--primary-color), var(--secondary-color)) border-box;
+    border-radius: 12px;
+    border: 2px solid transparent;
+}
+.bigPoint h2 {
+    font-size: 2em;
+}
+.bigPoint p {
+    font-size: 1.1em;
+    line-height: 1.3;
+}
+.bigPoint img {
+    position: relative;
+    max-width: 100%;
+    /* height: 60%; */
+    border-radius: 12px;
+    margin-top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+@media (max-width: 600px) {
+    :root { font-size: 80%; }
+    #topBar {
+        width: 96%;
+        left: 2%
+    }
+    #bigPointParent {
+        /* margin-top: 0; */
+        flex-direction: column;
+        gap: 20px;
+    }
+    .bigPoint { width: 100%; }
+}
+
+#content {
+    margin: 120px 0;
+    position: relative;
+    width: 70%;
+    left: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#content p {
+    font-size: 1.3em;
+    max-width: 55%;
+    line-height: 1.6;
+    position: relative;
+}
+#adVideo {
+    width: 20%;
+    border-radius: 12px;
+}
+@media (max-width: 600px) {
+    #content {
+        flex-direction: column;
+        gap: 20px;
+    }
+    #content p { max-width: unset; }
+    #adVideo { width: 100%; }
+}
+
+#midAddButton {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
