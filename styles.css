@@ -24,7 +24,7 @@ body {
 }
 
 .Collider {
-  perspective: 800px;
+  perspective: clamp(800px, 40vw, 40vw);
   display: inline-block;
 }
 .Collider div {
