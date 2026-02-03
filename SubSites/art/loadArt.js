@@ -1,5 +1,6 @@
 loadArt("dio.txt", document.getElementById("dioTarget"))
 loadArt("diego.txt", document.getElementById("diegoTarget"))
+loadArt("johnny.txt", document.getElementById("johnnyTarget"))
 
 function loadArt(file, targetElement) {
   fetch("./files/" + file)
