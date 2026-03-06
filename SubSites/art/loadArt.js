@@ -1,5 +1,6 @@
 loadArt("xenia.txt", document.getElementById("xeniaTarget"))
 loadArt("dio.txt", document.getElementById("dioTarget"))
+loadArt("v1.txt", document.getElementById("v1Target"))
 loadArt("diego.txt", document.getElementById("diegoTarget"))
 loadArt("johnny.txt", document.getElementById("johnnyTarget"))
 loadArt("diego2.txt", document.getElementById("diego2Target"))
