@@ -188,7 +188,7 @@ div.location p {
   text-align: center;
   vertical-align: middle;
 }
-.language svg, .framework svg, .practice svg {
+.language img, .framework img, .practice img {
   position: relative;
   height: 1rem;
   vertical-align: text-top;
@@ -211,7 +211,7 @@ div.location p {
         font-size: 1.3rem !important;
         margin: 8px 8px;
     }
-    .language svg, .framework svg, .practice svg {
+    .language img, .framework img, .practice img {
         height: 1.6rem;
     }
 }
@@ -287,7 +287,7 @@ div.location p {
 .job p, .project p {
   font-size: 0.8em;
 }
-.job img, .job svg, .project img, .project svg {
+.job img, .project img {
   max-width: 20%;
 }
 .link {
