@@ -1,19 +1,30 @@
-loadArt("xenia.txt", document.getElementById("xeniaTarget"))
-loadArt("dio.txt", document.getElementById("dioTarget"))
-loadArt("v1.txt", document.getElementById("v1Target"))
-loadArt("diego.txt", document.getElementById("diegoTarget"))
-loadArt("johnny.txt", document.getElementById("johnnyTarget"))
-loadArt("diego2.txt", document.getElementById("diego2Target"))
+loadAllArt();
 
-function loadArt(file, targetElement) {
-  fetch("./files/" + file)
-    .then(response => response.text())
-    .then(data => {
-      let maxLineLength = getArtLength(data);
-      console.log(maxLineLength);
-      targetElement.style.fontSize = `${100/maxLineLength/0.6}cqw`
-      targetElement.innerHTML = color(data);
-    });
+async function loadAllArt() {
+  await loadArt("xenia.txt", "Xenia, the Linux fox");
+  await loadArt("dio.txt", "Dio Brando");
+  await loadArt("v1.txt", "V1");
+  await loadArt("diego.txt", "Diego Brando");
+  await loadArt("johnny.txt", "Johnny Joestar");
+  await loadArt("diego2.txt", "Diego Brando");
+}
+
+const ASCII_TARGET = document.querySelector("content");
+async function loadArt(file, title) {
+  const resp = await fetch("./files/" + file);
+  const data = await resp.text();
+  const maxLineLength = getArtLength(data);
+  // console.log(maxLineLength);
+  const titleElement = document.createElement("h2");
+  titleElement.innerHTML = title;
+
+  const artElement = document.createElement("pre");
+  artElement.setAttribute("class", "ascii")
+  artElement.style.fontSize = `${100 / maxLineLength / 0.6}cqw`;
+  artElement.innerHTML = color(data);
+
+  ASCII_TARGET.appendChild(titleElement);
+  ASCII_TARGET.appendChild(artElement)
 }
 
 function getArtLength(s) {
